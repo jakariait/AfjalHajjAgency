@@ -18,6 +18,7 @@ const columns = [
   { id: "fullName", label: "Name", minWidth: 100 },
   { id: "phoneNumber", label: "Phone Number", minWidth: 100 },
   { id: "emailAddress", label: "Email Address", minWidth: 100 },
+  { id: "services", label: "Services", minWidth: 100 },
   { id: "message", label: "Message", minWidth: 270 },
   { id: "served", label: "Status", minWidth: 100, align: "center" },
   { id: "actions", label: "Actions", minWidth: 100, align: "center" },
@@ -42,7 +43,9 @@ const ContactTable = () => {
         if (!response.ok) throw new Error("Failed to fetch contacts");
 
         const data = await response.json();
-        const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const sortedData = data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
         setContacts(sortedData);
       } catch (error) {
         console.log(error.message);
@@ -100,7 +103,7 @@ const ContactTable = () => {
       if (!response.ok) throw new Error("Failed to update status");
 
       setContacts((prev) =>
-        prev.map((c) => (c._id === id ? updatedContact : c))
+        prev.map((c) => (c._id === id ? updatedContact : c)),
       );
     } catch (error) {
       alert(error.message);
@@ -151,7 +154,9 @@ const ContactTable = () => {
                                 <Button
                                   variant="contained"
                                   color={value ? "success" : "error"}
-                                  onClick={() => handleToggleServed(contact._id)}
+                                  onClick={() =>
+                                    handleToggleServed(contact._id)
+                                  }
                                 >
                                   {value ? "Served" : "Pending"}
                                 </Button>

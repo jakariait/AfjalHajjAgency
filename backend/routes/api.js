@@ -230,30 +230,11 @@ router.put(
 
 // Routes for Contact Us Form
 router.post("/contacts", contactController.createContact);
-router.get(
-  "/contacts",
-  adminProtect,
-  checkPermission("contact_request"),
-  contactController.getAllContacts,
-);
-router.get(
-  "/contacts/:id",
-  adminProtect,
-  checkPermission("contact_request"),
-  contactController.getContactById,
-);
-router.put(
-  "/contacts/:id",
-  adminProtect,
-  checkPermission("contact_request"),
-  contactController.updateContact,
-);
-router.delete(
-  "/contacts/:id",
-  adminProtect,
-  checkPermission("contact_request"),
-  contactController.deleteContact,
-);
+router.get("/contacts", adminProtect, contactController.getAllContacts);
+router.get("/contacts/:id", adminProtect, contactController.getContactById);
+router.put("/contacts/:id", adminProtect, contactController.updateContact);
+router.delete("/contacts/:id", adminProtect, contactController.deleteContact);
+
 
 // Admin Login route
 router.post("/admin/login", AdminController.loginAdmin);
