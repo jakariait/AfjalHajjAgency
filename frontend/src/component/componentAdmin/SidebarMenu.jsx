@@ -25,6 +25,7 @@ import {
   FaBlog,
 } from "react-icons/fa";
 import { CircularProgress } from "@mui/material";
+import { LuGalleryThumbnails } from "react-icons/lu";
 
 import useAuthAdminStore from "../../store/AuthAdminStore.js";
 import useProductStore from "../../store/useProductStore.js";
@@ -78,13 +79,13 @@ export default function SidebarMenu() {
           path: "/admin/general-info",
           permission: "website_theme_color",
         },
-        {
-          type: "link",
-          label: "Website Theme Color",
-          icon: <FaPalette />,
-          path: "/admin/color-updater/",
-          permission: "general_info",
-        },
+        // {
+        //   type: "link",
+        //   label: "Website Theme Color",
+        //   icon: <FaPalette />,
+        //   path: "/admin/color-updater/",
+        //   permission: "general_info",
+        // },
         {
           type: "link",
           label: "Social Media Links",
@@ -101,8 +102,8 @@ export default function SidebarMenu() {
         },
         {
           type: "link",
-          label: "Image Gallery",
-          icon: <FaSearch />,
+          label: "Gallery",
+          icon: <LuGalleryThumbnails />,
           path: "/admin/image-gallery",
           permission: "image_gallery",
         },
@@ -224,7 +225,12 @@ export default function SidebarMenu() {
       type: "accordion",
       title: "Manage Products",
       icon: <FaTags />,
-      permission: ["add_products", "delete_products", "view_products", "edit_products"],
+      permission: [
+        "add_products",
+        "delete_products",
+        "view_products",
+        "edit_products",
+      ],
       match: "any",
       subItems: [
         {
@@ -336,34 +342,34 @@ export default function SidebarMenu() {
           path: "/admin/contact-request",
           permission: "contact_request",
         },
-        {
-          type: "link",
-          label: "Subscribed Users",
-          icon: <FaUserFriends />,
-          path: "/admin/subscribed-users",
-          permission: "subscribed_users",
-        },
-        {
-          type: "link",
-          label: "Blogs",
-          icon: <FaBlog />,
-          path: "/admin/blogs",
-          permission: "blogs",
-        },
-        {
-          type: "link",
-          label: "Sliders & Banners",
-          icon: <FaSlidersH />,
-          path: "/admin/sliders-banners",
-          permission: "sliders-banners",
-        },
-        {
-          type: "link",
-          label: "Terms & Policies",
-          icon: <FaFileAlt />,
-          path: "/admin/terms-policies",
-          permission: "about_terms-policies",
-        },
+        // {
+        //   type: "link",
+        //   label: "Subscribed Users",
+        //   icon: <FaUserFriends />,
+        //   path: "/admin/subscribed-users",
+        //   permission: "subscribed_users",
+        // },
+        // {
+        //   type: "link",
+        //   label: "Blogs",
+        //   icon: <FaBlog />,
+        //   path: "/admin/blogs",
+        //   permission: "blogs",
+        // },
+        // {
+        //   type: "link",
+        //   label: "Sliders & Banners",
+        //   icon: <FaSlidersH />,
+        //   path: "/admin/sliders-banners",
+        //   permission: "sliders-banners",
+        // },
+        // {
+        //   type: "link",
+        //   label: "Terms & Policies",
+        //   icon: <FaFileAlt />,
+        //   path: "/admin/terms-policies",
+        //   permission: "about_terms-policies",
+        // },
         {
           type: "link",
           label: "FAQs",
@@ -371,13 +377,13 @@ export default function SidebarMenu() {
           path: "/admin/faqs",
           permission: "faqs",
         },
-        {
-          type: "link",
-          label: "About Us",
-          icon: <FaInfo />,
-          path: "/admin/about-us",
-          permission: "about_terms-policies",
-        },
+        // {
+        //   type: "link",
+        //   label: "About Us",
+        //   icon: <FaInfo />,
+        //   path: "/admin/about-us",
+        //   permission: "about_terms-policies",
+        // },
       ],
     },
     {
@@ -441,25 +447,28 @@ export default function SidebarMenu() {
             </ul>
           );
         } else if (item.type === "group") {
-            return (
-              <div key={index}>
-                <ul className="space-y-1">
-                  {item.items.map((groupItem, groupIndex) => (
-                    <RequirePermission
-                      key={groupIndex}
-                      permission={groupItem.permission}
-                      fallback={true}
-                    >
-                      <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer">
-                        <Link to={groupItem.path} className={"flex items-center gap-2"}>
-                          {groupItem.icon} <span>{groupItem.label}</span>
-                        </Link>
-                      </li>
-                    </RequirePermission>
-                  ))}
-                </ul>
-              </div>
-            );
+          return (
+            <div key={index}>
+              <ul className="space-y-1">
+                {item.items.map((groupItem, groupIndex) => (
+                  <RequirePermission
+                    key={groupIndex}
+                    permission={groupItem.permission}
+                    fallback={true}
+                  >
+                    <li className="flex items-center space-x-2 p-2 rounded-md cursor-pointer">
+                      <Link
+                        to={groupItem.path}
+                        className={"flex items-center gap-2"}
+                      >
+                        {groupItem.icon} <span>{groupItem.label}</span>
+                      </Link>
+                    </li>
+                  </RequirePermission>
+                ))}
+              </ul>
+            </div>
+          );
         } else if (item.type === "logout") {
           return (
             <ul key={index}>

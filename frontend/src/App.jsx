@@ -306,19 +306,19 @@ function App() {
           {/* Protected Admin Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/admin/general-info" element={<GeneralInfoPage />} />
-            <Route
-              path="/admin/subscribed-users"
-              element={<SubscribedUsersPage />}
-            />
-            <Route path="/admin/color-updater" element={<ColorUpdaterPage />} />
+            {/*<Route*/}
+            {/*  path="/admin/subscribed-users"*/}
+            {/*  element={<SubscribedUsersPage />}*/}
+            {/*/>*/}
+            {/*<Route path="/admin/color-updater" element={<ColorUpdaterPage />} />*/}
             <Route
               path="/admin/social-link-updater"
               element={<SocialLinkUpdaterPage />}
             />
-            <Route
-              path="/admin/sliders-banners"
-              element={<SliderBannerPage />}
-            />
+            {/*<Route*/}
+            {/*  path="/admin/sliders-banners"*/}
+            {/*  element={<SliderBannerPage />}*/}
+            {/*/>*/}
             <Route
               path="/admin/contact-request"
               element={<ContactRequestPage />}
@@ -434,8 +434,8 @@ function App() {
             <Route path="/admin/orders/:orderId" element={<ViewOrderPage />} />
 
             <Route path="/admin/coupon" element={<CouponPage />} />
-            <Route path="/admin/about-us" element={<AboutUsPage />} />
-            <Route path="/admin/terms-policies" element={<TermsPage />} />
+            {/*<Route path="/admin/about-us" element={<AboutUsPage />} />*/}
+            {/*<Route path="/admin/terms-policies" element={<TermsPage />} />*/}
             <Route path="/admin/faqs" element={<AdminFAQSPage />} />
             <Route path="/admin/scroll-text" element={<MarqueeAdminPage />} />
             <Route path="/admin/homepage-seo" element={<AdminMetaPage />} />
@@ -456,11 +456,11 @@ function App() {
               path="/admin/incomplete-order"
               element={<AbandonedCartPage />}
             />
-            <Route path="/admin/create-blog" element={<CreateBlogPage />} />
+            {/*<Route path="/admin/create-blog" element={<CreateBlogPage />} />*/}
 
-            <Route path="/admin/blogs" element={<BlogsListPage />} />
+            {/*<Route path="/admin/blogs" element={<BlogsListPage />} />*/}
 
-            <Route path="/admin/blogs/:id" element={<EditBlogPage />} />
+            {/*<Route path="/admin/blogs/:id" element={<EditBlogPage />} />*/}
 
             <Route path="/admin/image-gallery" element={<ImageGalleryPage />} />
           </Route>
