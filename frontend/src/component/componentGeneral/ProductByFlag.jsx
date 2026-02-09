@@ -5,6 +5,7 @@ import useFlagStore from "../../store/useFlagStore.js";
 import ProductList from "./ProductList.jsx";
 import Skeleton from "react-loading-skeleton";
 import { FaArrowRight } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ProductByFlag = () => {
   const { homeProducts, loading: productsLoading } = useProductStore();
@@ -47,7 +48,7 @@ const ProductByFlag = () => {
         const encodedFlag = encodeURIComponent(flag.name); // for URL safety
         const viewAllLink = `/shop?page=1&limit=20&flags=${encodedFlag}`;
 
-        const slicedProducts = products.slice(0, 8); // Show max 8
+        const slicedProducts = products.slice(0, 6); // Show max 8
 
         return (
           <div key={flag._id} className={"mb-5"}>
@@ -61,15 +62,111 @@ const ProductByFlag = () => {
 
             {/* ✅ Render once with sliced products */}
             <ProductList products={slicedProducts} />
-            <div className={"flex flex-wrap justify-center mt-5"}>
-              {products.length > 8 && (
-                <Link
-                  to={viewAllLink}
-                  className="primaryTextColor primaryBorderColor border-1 px-4 py-2 rounded"
-                >
-                  <div className="flex gap-6 justify-center items-center">
-                    View All <FaArrowRight />
-                  </div>
+            <div className={"flex flex-wrap justify-center mt-10 -mb-10"}>
+              {products.length > 6 && (
+                <Link to={viewAllLink}>
+                  <motion.button
+                    className="group cursor-pointer relative bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 text-white font-bold px-12 py-4 rounded-2xl shadow-xl uppercase overflow-hidden border-2 border-amber-400/50 hover:border-amber-300"
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 20px 40px rgba(245, 158, 11, 0.4)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  >
+                    {/* Animated Background Pattern */}
+                    <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-300">
+                      <svg
+                        width="100%"
+                        height="100%"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs>
+                          <pattern
+                            id="view-btn-pattern"
+                            x="0"
+                            y="0"
+                            width="40"
+                            height="40"
+                            patternUnits="userSpaceOnUse"
+                          >
+                            <path
+                              d="M20 0 L30 10 L20 20 L10 10 Z"
+                              fill="none"
+                              stroke="white"
+                              strokeWidth="0.5"
+                            />
+                            <circle
+                              cx="20"
+                              cy="20"
+                              r="6"
+                              fill="none"
+                              stroke="white"
+                              strokeWidth="0.3"
+                            />
+                          </pattern>
+                        </defs>
+                        <rect
+                          width="100%"
+                          height="100%"
+                          fill="url(#view-btn-pattern)"
+                        />
+                      </svg>
+                    </div>
+
+                    {/* Shimmer Effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: "100%" }}
+                      transition={{ duration: 1.0 }}
+                    ></motion.div>
+
+                    {/* Button Text */}
+                    <span className="relative z-10 flex items-center justify-center gap-3 text-lg">
+                      <motion.span
+                        className="w-2 h-2 rotate-45 bg-white/80"
+                        whileHover={{ rotate: 225 }}
+                        transition={{ duration: 0.5 }}
+                      ></motion.span>
+                      বাকি পণ্যগুলো দেখুন
+                      <motion.span
+                        className="w-2 h-2 rotate-45 bg-white/80"
+                        whileHover={{ rotate: 225 }}
+                        transition={{ duration: 0.5 }}
+                      ></motion.span>
+                    </span>
+
+                    {/* Decorative Corners */}
+                    <motion.div
+                      className="absolute top-1.5 left-1.5 w-4 h-4 border-t-2 border-l-2 border-white/40 rounded-tl"
+                      whileHover={{ width: "1.25rem", height: "1.25rem" }}
+                      transition={{ duration: 0.3 }}
+                    ></motion.div>
+                    <motion.div
+                      className="absolute top-1.5 right-1.5 w-4 h-4 border-t-2 border-r-2 border-white/40 rounded-tr"
+                      whileHover={{ width: "1.25rem", height: "1.25rem" }}
+                      transition={{ duration: 0.3 }}
+                    ></motion.div>
+                    <motion.div
+                      className="absolute bottom-1.5 left-1.5 w-4 h-4 border-b-2 border-l-2 border-white/40 rounded-bl"
+                      whileHover={{ width: "1.25rem", height: "1.25rem" }}
+                      transition={{ duration: 0.3 }}
+                    ></motion.div>
+                    <motion.div
+                      className="absolute bottom-1.5 right-1.5 w-4 h-4 border-b-2 border-r-2 border-white/40 rounded-br"
+                      whileHover={{ width: "1.25rem", height: "1.25rem" }}
+                      transition={{ duration: 0.3 }}
+                    ></motion.div>
+
+                    {/* Glow Effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400/0 via-emerald-400/20 to-emerald-400/0"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    ></motion.div>
+                  </motion.button>
                 </Link>
               )}
             </div>

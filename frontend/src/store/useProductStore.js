@@ -21,7 +21,9 @@ const useProductStore = create((set) => ({
 
     try {
       const queryString = new URLSearchParams(params).toString();
-      const response = await axios.get(`${apiUrl}/getAllProducts?${queryString}`);
+      const response = await axios.get(
+        `${apiUrl}/getAllProducts?${queryString}`,
+      );
 
       set({
         products: response.data.products || [],
@@ -38,14 +40,14 @@ const useProductStore = create((set) => ({
     }
   },
 
-
-
   fetchProductsAdmin: async (params) => {
     set({ loading: true, error: null });
 
     try {
       const queryString = new URLSearchParams(params).toString();
-      const response = await axios.get(`${apiUrl}/getAllProductsAdmin?${queryString}`);
+      const response = await axios.get(
+        `${apiUrl}/getAllProductsAdmin?${queryString}`,
+      );
 
       set({
         products: response.data.products || [],
@@ -86,7 +88,8 @@ const useProductStore = create((set) => ({
       set({ product: response.data.data || null, loading: false });
     } catch (error) {
       set({
-        error: error.response?.data?.message || "Failed to fetch product by slug",
+        error:
+          error.response?.data?.message || "Failed to fetch product by slug",
         loading: false,
       });
     }
@@ -108,7 +111,7 @@ const useProductStore = create((set) => ({
 
       set((state) => ({
         products: state.products.map((prod) =>
-          prod._id === id ? response.data : prod
+          prod._id === id ? response.data : prod,
         ),
         loading: false,
       }));
@@ -152,14 +155,12 @@ const useProductStore = create((set) => ({
       set({ homeProducts: response.data.data || {}, loading: false });
     } catch (error) {
       set({
-        error: error.response?.data?.message || "Failed to fetch homepage products",
+        error:
+          error.response?.data?.message || "Failed to fetch homepage products",
         loading: false,
       });
     }
   },
-
-
-
 }));
 
 export default useProductStore;
