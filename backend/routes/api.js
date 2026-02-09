@@ -39,6 +39,8 @@ const pathaoConfigController = require("../controllers/pathaoConfigController");
 const ResultController = require("../controllers/ResultController");
 const videoLinkController = require("../controllers/VideoLinkController");
 const TestimonialController = require("../controllers/TestimonialController");
+const PackageController = require("../controllers/PackageController");
+
 
 
 const {
@@ -863,5 +865,13 @@ router.delete(
   adminProtect,
   TestimonialController.deleteTestimonial,
 );
+
+
+// Routes for Packages
+router.post("/packages", adminProtect, PackageController.createPackage);
+router.get("/packages", PackageController.getAllPackages);
+router.get("/packages/:id", PackageController.getPackageById);
+router.patch("/packages/:id", adminProtect, PackageController.updatePackage);
+router.delete("/packages/:id", adminProtect, PackageController.deletePackage);
 
 module.exports = router;

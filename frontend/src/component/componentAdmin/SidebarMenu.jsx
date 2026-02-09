@@ -114,6 +114,13 @@ export default function SidebarMenu() {
           path: "/admin/testimonials",
           permission: "testimonial",
         },
+        {
+          type: "link",
+          label: "Packages",
+          icon: <LuGalleryThumbnails />,
+          path: "/admin/packages",
+          permission: "packages",
+        },
       ],
     },
     {

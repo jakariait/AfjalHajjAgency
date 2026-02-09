@@ -26,6 +26,8 @@ import ImageGalleryPage from "./pagesAdmin/ImageGalleryPage.jsx";
 import UserImageGalleryPage from "./pagesUser/UserImageGalleryPage.jsx";
 import UserVideoGalleryPage from "./pagesUser/UserVideoGalleryPage.jsx";
 import TestimonialsPage from "./pagesAdmin/TestimonialsPage.jsx";
+import AdminPackagePage from "./pagesAdmin/AdminPackagePage.jsx";
+import UserPackagePage from "./pagesUser/UserPackagePage.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
@@ -284,6 +286,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/image-gallery" element={<UserImageGalleryPage />} />
           <Route path="/video-gallery" element={<UserVideoGalleryPage />} />
+          <Route path="/packages" element={<UserPackagePage />} />
 
           {/*Admin Login Page*/}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -464,6 +467,7 @@ function App() {
 
             <Route path="/admin/image-gallery" element={<ImageGalleryPage />} />
             <Route path="/admin/testimonials" element={<TestimonialsPage />} />
+            <Route path="/admin/packages" element={<AdminPackagePage />} />
           </Route>
 
           {/* Not Found */}

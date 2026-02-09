@@ -6,6 +6,7 @@ import Services from "../component/componentGeneral/Service.jsx";
 import Gallery from "../component/componentGeneral/Gallery.jsx";
 import VideoGallery from "../component/componentGeneral/VideoGallery.jsx";
 import Testimonial from "../component/componentGeneral/Testimonial.jsx";
+import Package from "../component/componentGeneral/Package.jsx";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
         ]}
         isHomePage={true}
       />
+      <Package isHomePage={true}  />
       <ProductByFlag />
       <Gallery isHomePage={true} />
       <VideoGallery isHomePage={true} />

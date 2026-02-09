@@ -458,7 +458,7 @@ export default function Header() {
 
           {/* Mobile Registration */}
           <div className="relative md:hidden border-t-2 border-emerald-200/50 p-4 bg-gradient-to-r from-emerald-50/50 to-amber-50/50">
-            <Registration />
+            <CartLogin />
           </div>
 
           {/* Decorative Bottom Corners */}

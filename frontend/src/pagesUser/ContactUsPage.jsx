@@ -1,11 +1,11 @@
 import React from 'react';
 import Layout from "../component/componentGeneral/Layout.jsx";
-import ContactForm from "../component/componentGeneral/ContactForm.jsx";
+import ContactSection from "../component/componentGeneral/ContactSection.jsx";
 
 const ContactUsPage = () => {
   return (
     <Layout>
-      <ContactForm />
+      <ContactSection />
     </Layout>
   );
 };

@@ -1,262 +1,342 @@
-import React, { useEffect, useState } from "react";
-import SocialMedia from "./SocialMedia.jsx";
-import GeneralInfoStore from "../../store/GeneralInfoStore.js";
-import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
-import { MdEmail, MdOutlinePhoneInTalk } from "react-icons/md";
-import axios from "axios";
-import Skeleton from "react-loading-skeleton";
-import { Breadcrumbs, Link, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Send } from "lucide-react";
 
 const ContactForm = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
-  const { GeneralInfoList, GeneralInfoListLoading, GeneralInfoListError } =
-    GeneralInfoStore();
-  // State to manage form data
   const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    emailAddress: "",
+    name: "",
+    email: "",
+    phone: "",
+    service: "hajj-umrah",
     message: "",
   });
-  // State to manage form submission status
-  const [status, setStatus] = useState("");
-  const [isStatusVisible, setIsStatusVisible] = useState(true);
 
-  // Handle input changes
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errors, setErrors] = useState({});
+  const [formIsValid, setFormIsValid] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
+    }));
+    // Clear the error for the current field
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
     }));
   };
 
-  // Modified handleSubmit to reset visibility
+  const validateForm = (setFieldErrors = true) => {
+    let newErrors = {};
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      newErrors.name = "পূর্ণ নাম আবশ্যক!";
+      isValid = false;
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "ফোন নম্বর আবশ্যক!";
+      isValid = false;
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = "বার্তা আবশ্যক!";
+      isValid = false;
+    }
+
+    if (setFieldErrors) {
+      setErrors(newErrors);
+    }
+    return isValid;
+  };
+
+  useEffect(() => {
+    setFormIsValid(validateForm(false)); // Validate without setting errors
+  }, [formData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsStatusVisible(true); // Reset visibility on new submission
-    setStatus("Submitting...");
+
+    if (!validateForm()) {
+      // validateForm will set errors if it's called with setFieldErrors = true (default)
+      return; // Stop submission if validation fails
+    }
+
+    const payload = {
+      fullName: formData.name,
+      phoneNumber: formData.phone,
+      emailAddress: formData.email,
+      services: formData.service,
+      message: formData.message,
+    };
+
     try {
-      const response = await axios.post(`${apiUrl}/contacts`, formData);
-      if (response.status >= 200 && response.status < 300) {
-        setStatus(
-          "Thank you for reaching out! Your message has been received.",
-        );
+      const res = await fetch(`${apiUrl}/contacts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        // ✅ Fire GTM event on success
+        gtmPushEvent("form_submission", {
+          formType: "ContactForm",
+          fullName: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+        });
+
+        setSuccessMsg("✅ আপনার বার্তা সফলভাবে পাঠানো হয়েছে!");
         setFormData({
-          fullName: "",
-          phoneNumber: "",
-          emailAddress: "",
+          name: "",
+          email: "",
+          phone: "",
+          service: "hajj-umrah",
           message: "",
         });
+
+        setTimeout(() => setSuccessMsg(""), 3000);
       } else {
-        setStatus("Submission failed. Please try again.");
+        console.error("❌ Failed to send message");
       }
     } catch (error) {
-      setStatus("Submission failed. Please try again.");
+      console.error("❌ Error submitting form:", error);
     }
   };
 
-  // Update useEffect to handle status visibility properly
-  useEffect(() => {
-    if (status) {
-      setIsStatusVisible(true);
-      const timer = setTimeout(() => {
-        setIsStatusVisible(false);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [status]);
-  if (GeneralInfoListError) {
-    return (
-      <div className="primaryTextColor  container md:mx-auto text-center p-3">
-        <h1 className={"p-40"}>
-          Something went wrong! Please try again later.
-        </h1>
-      </div>
-    ); // Display error message
-  }
   return (
-    <div className="container mx-auto mb-3 mt-3 shadow rounded-lg">
-      {GeneralInfoListLoading ? (
-        <>
-          <Skeleton height={150} width={"100%"} />
-          <div className={"grid grid-rows-1 md:grid-cols-2 gap-3"}>
-            <Skeleton height={350} width={"100%"} />
-            <Skeleton height={350} width={"100%"} />
-          </div>
-          <Skeleton height={300} width={"100%"} />
-        </>
-      ) : (
-        <>
-          {/* Breadcrumb Section */}
-          <div className="flex flex-col items-center justify-center p-6 md:p-10 gap-3">
-            <h1 className="text-2xl">Contact Us</h1>
-            <Breadcrumbs aria-label="breadcrumb">
-              <Link component={RouterLink} to="/" color="inherit">
-                Home
-              </Link>
-              <Typography color="text.primary">Contact Us</Typography>
-            </Breadcrumbs>
-          </div>
+    <div className="group relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-900 rounded-2xl p-8 shadow-2xl overflow-hidden">
+      {/* Decorative Pattern Background */}
+      <div className="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.08] transition-opacity duration-300">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="form-pattern"
+              x="0"
+              y="0"
+              width="60"
+              height="60"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M30 0 L45 15 L30 30 L15 15 Z"
+                fill="none"
+                stroke="white"
+                strokeWidth="0.5"
+              />
+              <circle
+                cx="30"
+                cy="30"
+                r="10"
+                fill="none"
+                stroke="white"
+                strokeWidth="0.3"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#form-pattern)" />
+        </svg>
+      </div>
 
-          <div className="p-3">
-            {/* Title Section */}
-            <div className="pb-6">
-              <h1 className="text-3xl relative pb-2">
-                Get In Touch
-                <span className="absolute left-0 bottom-0 w-16 border-b-2 border-black"></span>
-              </h1>
+      {/* Top Decorative Border */}
+      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400"></div>
+
+      {/* Content */}
+      <div className="relative">
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
+          <span className="w-2 h-2 rotate-45 bg-amber-400"></span>
+          আমাদের বার্তা পাঠান
+          <span className="w-2 h-2 rotate-45 bg-amber-400"></span>
+        </h3>
+
+        <div className="space-y-6">
+          {/* Name Field */}
+          <div>
+            <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
+              পূর্ণ নাম *
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 placeholder-gray-400"
+                placeholder="আপনার পূর্ণ নাম লিখুন"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+              )}
+              {/* Decorative corners */}
+              <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
+              <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
             </div>
+          </div>
 
-            {/* Contact Details + Form Section */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
-              {/* Contact Details Section */}
-              <div className="primaryBgColor accentTextColor rounded-lg p-6 md:p-10 flex flex-col gap-4 w-full h-full">
-                <h1 className="text-xl pb-2">Contact Us</h1>
-                <div className="flex items-center gap-2">
-                  <MdOutlinePhoneInTalk className="text-2xl md:text-3xl" />
-                  <div className="flex flex-col text-sm">
-                    {GeneralInfoList?.PhoneNumber.map((number, index) => (
-                      <a key={index} href={`tel:${number}`} className="mr-2">
-                        {number}
-                      </a>
-                    ))}
-                  </div>
-                </div>
+          {/* Email Field */}
+          <div>
+            <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
+              ইমেইল ঠিকানা
+            </label>
+            <div className="relative">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 placeholder-gray-400"
+                placeholder="আপনার ইমেইল ঠিকানা লিখুন"
+              />
+              {/* Decorative corners */}
+              <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
+              <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
+            </div>
+          </div>
 
-                <h1 className="text-xl pb-2 mt-4">Email Address</h1>
-                <div className="flex items-center gap-2">
-                  <MdEmail className="text-2xl md:text-3xl" />
-                  <div className="flex flex-col text-sm">
-                    {GeneralInfoList?.CompanyEmail.map((email, index) => (
-                      <a key={index} href={`mailto:${email}`} className="mr-2">
-                        {email}
-                      </a>
-                    ))}
-                  </div>
-                </div>
+          {/* Phone Field */}
+          <div>
+            <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
+              ফোন নম্বর *
+            </label>
+            <div className="relative">
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 placeholder-gray-400"
+                placeholder="আপনার ফোন নম্বর লিখুন"
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+              )}
+              {/* Decorative corners */}
+              <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
+              <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
+            </div>
+          </div>
 
-                <h1 className="text-xl pb-2 mt-4">Office Location</h1>
-                <div className="flex items-center gap-2">
-                  <HiOutlineBuildingOffice2 className="text-2xl md:text-3xl" />
-                  <span className="text-sm">
-                    {GeneralInfoList?.CompanyAddress}
-                  </span>
-                </div>
+          {/* Service Selection */}
+          <div>
+            <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
+              সেবা নির্বাচন করুন
+            </label>
+            <div className="relative">
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 cursor-pointer"
+              >
+                <option value="hajj-umrah">হজ ও ওমরাহ</option>
+                <option value="hajj">হজ প্যাকেজ</option>
+                <option value="umrah">ওমরাহ প্যাকেজ</option>
+                <option value="visa">ভিসা সেবা</option>
+                <option value="other">অন্যান্য</option>
+              </select>
+              {/* Decorative corners */}
+              <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
+              <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
+            </div>
+          </div>
 
-                <h1 className="text-xl pb-2 mt-4">Follow Us</h1>
-                <SocialMedia />
-              </div>
+          {/* Message Field */}
+          <div>
+            <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
+              বার্তা *
+            </label>
+            <div className="relative">
+              <textarea
+                name="message"
+                rows={5}
+                value={formData.message}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 placeholder-gray-400 resize-none"
+                placeholder="আপনার প্রয়োজন সম্পর্কে আমাদের জানান..."
+              ></textarea>
+              {errors.message && (
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+              )}
+              {/* Decorative corners */}
+              <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
+              <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
+            </div>
+          </div>
 
-              {/* Contact Form Section */}
-              <div className="rounded-lg bg-white shadow p-6 md:p-10 w-full h-full flex flex-col">
-                <h1 className="text-2xl font-bold text-gray-800 mb-6">
-                  Contact Me
-                </h1>
-                <form className="space-y-6 flex-grow" onSubmit={handleSubmit}>
-                  {/* Full Name Input */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      placeholder="Your Full Name"
-                      required={true}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                    />
-                  </div>
+          {/* Submit Button */}
+          <button
+            onClick={handleSubmit}
+            // disabled={!formIsValid}
+            className={`group/btn relative w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-amber-500/50 overflow-hidden
+            `}
+          >
+            {/* Shimmer Effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Phone Number Input */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Phone Number <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleInputChange}
-                        placeholder="+880*******"
-                        required={true}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                      />
-                    </div>
+            {/* Button Content */}
+            <span className="relative z-10 flex items-center gap-3">
+              <span className="w-2 h-2 rotate-45 bg-white/80"></span>
+              <Send className="w-5 h-5" />
+              <span className="text-lg">বার্তা পাঠান</span>
+              <span className="w-2 h-2 rotate-45 bg-white/80"></span>
+            </span>
 
-                    {/* Email Input */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        name="emailAddress"
-                        value={formData.emailAddress}
-                        onChange={handleInputChange}
-                        placeholder="demo@email.com"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                      />
-                    </div>
-                  </div>
+            {/* Decorative Corners */}
+            <div className="absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-white/40 rounded-tl"></div>
+            <div className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-white/40 rounded-br"></div>
+          </button>
+        </div>
 
-                  {/* Message Textarea */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Write Your Message <span className="text-red-500">*</span>
-                    </label>
-                    <textarea
-                      rows="4"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                      placeholder="Type your message here..."
-                    ></textarea>
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="primaryBgColor accentTextColor py-2 px-4 w-full md:w-auto rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium"
+        {/* Success Message */}
+        {successMsg && (
+          <div className="relative mt-6 bg-gradient-to-r from-green-600 to-green-700 text-white p-4 rounded-xl text-center font-semibold transition-all duration-300 shadow-lg overflow-hidden">
+            {/* Background pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <svg
+                width="100%"
+                height="100%"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <pattern
+                    id="success-pattern"
+                    x="0"
+                    y="0"
+                    width="40"
+                    height="40"
+                    patternUnits="userSpaceOnUse"
                   >
-                    Submit Now
-                  </button>
-                </form>
-                {/* Status Message */}
-                {isStatusVisible && (
-                  <div className="mt-4 text-center">
-                    <p
-                      className={`text-lg ${status.includes("failed") ? "text-red-500" : "primaryTextColor"}`}
-                    >
-                      {status}
-                    </p>
-                  </div>
-                )}
-              </div>
+                    <circle cx="20" cy="20" r="8" fill="white" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#success-pattern)" />
+              </svg>
             </div>
-          </div>
 
-          {/* Google Map Section */}
-          {GeneralInfoList?.GoogleMapLink && (
-            <div className="w-full h-60 md:h-96">
-              <iframe
-                className="w-full h-full border-0"
-                src={GeneralInfoList?.GoogleMapLink}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-          )}
-        </>
-      )}
+            <p className="relative z-10">{successMsg}</p>
+
+            {/* Decorative corners */}
+            <div className="absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-white/50 rounded-tl"></div>
+            <div className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-white/50 rounded-br"></div>
+          </div>
+        )}
+      </div>
+
+      {/* Card Decorative Corners */}
+      <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-amber-400/50 rounded-tl"></div>
+      <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-amber-400/50 rounded-tr"></div>
+      <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-amber-400/50 rounded-bl"></div>
+      <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-amber-400/50 rounded-br"></div>
     </div>
   );
 };
