@@ -19,6 +19,22 @@
   --color-accent: #FFFFFF;
   --color-dark: #0f172a;
 }
+
+@layer utilities {
+  /* Custom utility for smooth scroll behavior */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* Additional shadow utilities for Islamic design */
+  .shadow-islamic-gold {
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+  }
+
+  .shadow-islamic-gold-lg {
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.6);
+  }
+}
 /* Using CSS variables for custom classes */
 .primaryBgColor {
   background-color: var(--primaryColor);
@@ -191,4 +207,167 @@
 
 html {
   scroll-behavior: smooth; /* Smooth scrolling globally */
+}
+
+@layer utilities {
+  /* Custom utility for smooth scroll behavior */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* Additional shadow utilities for Islamic design */
+  .shadow-islamic-gold {
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+  }
+
+  .shadow-islamic-gold-lg {
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.6);
+  }
+
+  /* Custom Color Utilities */
+  .text-islamic-gold {
+    color: #D4AF37;
+  }
+
+  .bg-islamic-gold {
+    background-color: #D4AF37;
+  }
+
+  .text-islamic-green {
+    color: #0D5E47;
+  }
+
+  .bg-islamic-green {
+    background-color: #0D5E47;
+  }
+
+  .text-islamic-teal {
+    color: #115E59;
+  }
+
+  .bg-islamic-teal {
+    background-color: #115E59;
+  }
+
+  .text-islamic-cream {
+    color: #F8F6F0;
+  }
+
+  .bg-islamic-cream {
+    background-color: #F8F6F0;
+  }
+
+  /* Custom Animations */
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  .animate-scroll-dot {
+    animation: scroll-dot 1.5s ease-in-out infinite;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+@keyframes scroll-dot {
+  0% {
+    cy: 12;
+    opacity: 1;
+  }
+  100% {
+    cy: 28;
+    opacity: 0;
+  }
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D5E47;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9A54B;
+}
+
+/* Smooth animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D5E47;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9A54B;
+}
+
+/* Smooth animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
