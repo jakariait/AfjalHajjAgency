@@ -20,6 +20,8 @@ import MetaProvider from "./component/componentGeneral/MetaProvider.jsx";
 import ScrollToTopButton from "./component/componentGeneral/ScrollToTopButton.jsx";
 import { setFaviconFromApi } from "./utils/setFavicon.js";
 import Loading from "./component/skeleton/Loading.jsx";
+import ServicePage from "./pagesUser/ServicePage.jsx";
+import WhatsAppButton from "./component/componentGeneral/WhatsAppButton.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
@@ -251,11 +253,13 @@ function App() {
       <MetaProvider />
       <ScrollToTop />
       <ScrollToTopButton />
+      <WhatsAppButton />
       <Suspense fallback={<Loading />}>
         <Routes>
           {/* General User Routes */}
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/services" element={<ServicePage />} />
           <Route path="/product/:slug" element={<ProductDetailsPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -263,9 +267,9 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/thank-you/:orderId" element={<ThankYouPage />} />
           <Route path="/bkash-callback" element={<BkashCallbackPage />} />
-          <Route path="/about" element={<AboutUsPageUser />} />
-          <Route path="/termofservice" element={<TosPage />} />
-          <Route path="/privacypolicy" element={<PrivacyPolicyPage />} />
+          <Route path="/about-us" element={<AboutUsPageUser />} />
+          <Route path="/terms-and-conditions" element={<TosPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/refundpolicy" element={<RefundPolicyPage />} />
           <Route path="/shippinpolicy" element={<ShippingPolicyPage />} />
           <Route path="/faqs" element={<FAQPage />} />

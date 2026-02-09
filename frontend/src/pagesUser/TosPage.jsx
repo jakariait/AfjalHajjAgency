@@ -1,15 +1,11 @@
 import React from "react";
 import Layout from "../component/componentGeneral/Layout.jsx";
-
-import PublicContentViewer from "../component/componentGeneral/PublicContentViewer.jsx";
+import TermsCondition from "../component/componentGeneral/TermsCondition.jsx";
 
 const HomePage = () => {
   return (
     <Layout>
-      <PublicContentViewer
-        title="Terms of Services"
-        endpoint="terms"
-      />
+      <TermsCondition />
     </Layout>
   );
 };

@@ -1,77 +1,57 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import React from "react";
 
-const FAQSection = () => {
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const [faqs, setFaqs] = useState([]);
-  const [loading, setLoading] = useState(true);
+import UserFAQ from "../componentGeneral/UserFAQ.jsx";
 
-  useEffect(() => {
-    const fetchFAQs = async () => {
-      try {
-        const res = await axios.get(`${apiUrl}/faq`);
-        const publishedFaqs =
-          res.data?.data?.filter((faq) => faq.status === "published") || [];
-        setFaqs(publishedFaqs);
-      } catch (err) {
-        console.error("Failed to load FAQs:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFAQs();
-  }, [apiUrl]);
-
+export default function FAQSection() {
   return (
-    <section className="bg-white py-10 xl:container xl:mx-auto px-4 md:px-8">
-      <div className="text-center mb-10">
-        <Typography
-          variant="h4"
-          className="font-bold text-3xl md:text-5xl primaryTextColor"
-        >
-          Frequently Asked Questions
-        </Typography>
-        <div className="h-1 w-20 secondaryBgColor mx-auto rounded-full mt-4 shadow-md"></div>
+    <div className="relative bg-gradient-to-br from-emerald-50 via-white to-amber-50 text-gray-900 overflow-hidden">
+      {/* Background Islamic Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="faq-pattern"
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M50 0 L75 25 L50 50 L25 25 Z M50 50 L75 75 L50 100 L25 75 Z M0 25 L25 50 L0 75 L-25 50 Z M100 25 L125 50 L100 75 L75 50 Z"
+                fill="none"
+                stroke="#059669"
+                strokeWidth="0.5"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="15"
+                fill="none"
+                stroke="#059669"
+                strokeWidth="0.5"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="25"
+                fill="none"
+                stroke="#059669"
+                strokeWidth="0.3"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#faq-pattern)" />
+        </svg>
       </div>
 
-      {loading ? (
-        <div className="flex justify-center items-center h-40">
-          <CircularProgress />
-        </div>
-      ) : (
-        <div className="grid  gap-6 max-w-6xl mx-auto">
-          {faqs.map((faq) => (
-            <Accordion
-              key={faq._id}
-              className="rounded-xl shadow-sm hover:shadow-md transition-all"
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel-${faq._id}`}
-                className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-t-xl"
-              >
-                <Typography className="font-semibold text-base">
-                  {faq.question}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails className="bg-white px-4 py-2 text-gray-700 rounded-b-xl">
-                <Typography className="text-sm">{faq.answer}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </div>
-      )}
-    </section>
-  );
-};
+      {/* Decorative Top Border */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
 
-export default FAQSection;
+      <UserFAQ />
+
+      {/* Decorative Bottom Border */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent"></div>
+    </div>
+  );
+}
