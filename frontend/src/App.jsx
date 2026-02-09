@@ -22,6 +22,7 @@ import { setFaviconFromApi } from "./utils/setFavicon.js";
 import Loading from "./component/skeleton/Loading.jsx";
 import ServicePage from "./pagesUser/ServicePage.jsx";
 import WhatsAppButton from "./component/componentGeneral/WhatsAppButton.jsx";
+import ImageGalleryPage from "./pagesAdmin/ImageGalleryPage.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
@@ -455,6 +456,8 @@ function App() {
             <Route path="/admin/blogs" element={<BlogsListPage />} />
 
             <Route path="/admin/blogs/:id" element={<EditBlogPage />} />
+
+            <Route path="/admin/image-gallery" element={<ImageGalleryPage />} />
           </Route>
 
           {/* Not Found */}

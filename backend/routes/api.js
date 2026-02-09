@@ -36,6 +36,8 @@ const blogController = require("../controllers/BlogController");
 const PassWordResetController = require("../controllers/PassWordResetController");
 const pathaoController = require("../controllers/pathaoController");
 const pathaoConfigController = require("../controllers/pathaoConfigController");
+const ResultController = require("../controllers/ResultController");
+
 
 const {
   handleCourierCheck,
@@ -809,5 +811,21 @@ router.get("/blog/:id", blogController.getBlogById);
 // Password Reset Routes
 router.post("/request-reset", PassWordResetController.requestPasswordReset);
 router.post("/reset-password", PassWordResetController.resetPasswordWithOTP);
+
+
+//  Routes for Image Gallery
+router.post(
+  "/createresults",
+  upload,
+  adminProtect,
+  ResultController.createCarousel,
+);
+router.get("/getallresults", ResultController.getAllCarousel);
+
+router.delete(
+  "/deletebyidresults/:id",
+  adminProtect,
+  ResultController.deleteByIdCarousel,
+);
 
 module.exports = router;
