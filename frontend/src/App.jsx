@@ -23,6 +23,7 @@ import Loading from "./component/skeleton/Loading.jsx";
 import ServicePage from "./pagesUser/ServicePage.jsx";
 import WhatsAppButton from "./component/componentGeneral/WhatsAppButton.jsx";
 import ImageGalleryPage from "./pagesAdmin/ImageGalleryPage.jsx";
+import UserImageGalleryPage from "./pagesUser/UserImageGalleryPage.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
@@ -279,6 +280,8 @@ function App() {
           <Route path="/blogs/:slug" element={<BlogDetailsPage />} />
           <Route path="/forgot-password" element={<ForgetPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/image-gallery" element={<UserImageGalleryPage />} />
+
 
           {/*Admin Login Page*/}
           <Route path="/admin/login" element={<AdminLogin />} />
