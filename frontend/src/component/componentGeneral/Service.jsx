@@ -576,7 +576,7 @@ const Services = ({ selectedServices, isHomePage = false }) => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 0.6 }}
                 >
-                  <Link href="/contact-us">
+                  <Link to="/contact-us">
                     <motion.button
                       className="group/btn cursor-pointer relative w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-amber-500 hover:to-amber-600 text-white font-semibold py-3 px-6 rounded-xl shadow-md overflow-hidden"
                       whileHover={{ scale: 1.02 }}
@@ -623,9 +623,9 @@ const Services = ({ selectedServices, isHomePage = false }) => {
             </motion.div>
 
             <motion.div variants={fadeUpItemVariants}>
-              <Link href="/services">
+              <Link to="/services">
                 <motion.button
-                  className="group relative bg-gradient-to-br from-amber-500 to-amber-700 text-white font-bold px-12 py-4 rounded-2xl shadow-xl overflow-hidden"
+                  className="group relative cursor-pointer bg-gradient-to-br from-amber-500 to-amber-700 text-white font-bold px-12 py-4 rounded-2xl shadow-xl overflow-hidden"
                   whileHover={{
                     scale: 1.05,
                     boxShadow: "0 20px 40px rgba(245, 158, 11, 0.4)",
