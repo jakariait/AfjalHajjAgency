@@ -4,6 +4,7 @@ import ProductByFlag from "../component/componentGeneral/ProductByFlag.jsx";
 import HajjHero from "../component/componentGeneral/HajjHero.jsx";
 import Services from "../component/componentGeneral/Service.jsx";
 import Gallery from "../component/componentGeneral/Gallery.jsx";
+import VideoGallery from "../component/componentGeneral/VideoGallery.jsx";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
       />
       <ProductByFlag />
       <Gallery isHomePage={true} />
+      <VideoGallery isHomePage={true} />
 
     </Layout>
   );

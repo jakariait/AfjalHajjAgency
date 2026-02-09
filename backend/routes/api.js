@@ -37,6 +37,7 @@ const PassWordResetController = require("../controllers/PassWordResetController"
 const pathaoController = require("../controllers/pathaoController");
 const pathaoConfigController = require("../controllers/pathaoConfigController");
 const ResultController = require("../controllers/ResultController");
+const videoLinkController = require("../controllers/VideoLinkController");
 
 
 const {
@@ -827,5 +828,21 @@ router.delete(
   adminProtect,
   ResultController.deleteByIdCarousel,
 );
+
+// Routes for Video Links
+router.post("/video-links", adminProtect, videoLinkController.createVideoLink);
+router.get("/video-links", videoLinkController.getAllVideoLinks);
+router.get("/video-links/:id", videoLinkController.getVideoLinkById);
+router.patch(
+  "/video-links/:id",
+  adminProtect,
+  videoLinkController.updateVideoLink,
+);
+router.delete(
+  "/video-links/:id",
+  adminProtect,
+  videoLinkController.deleteVideoLink,
+);
+
 
 module.exports = router;

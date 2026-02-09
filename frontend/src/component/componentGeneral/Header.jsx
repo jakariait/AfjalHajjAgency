@@ -21,8 +21,8 @@ const menuItems = [
     path: "/packages",
   },
   {
-    name: "Products",
-    path: "/product",
+    name: "Shop",
+    path: "/shop",
   },
   {
     name: "About Us",

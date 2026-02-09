@@ -24,6 +24,7 @@ import ServicePage from "./pagesUser/ServicePage.jsx";
 import WhatsAppButton from "./component/componentGeneral/WhatsAppButton.jsx";
 import ImageGalleryPage from "./pagesAdmin/ImageGalleryPage.jsx";
 import UserImageGalleryPage from "./pagesUser/UserImageGalleryPage.jsx";
+import UserVideoGalleryPage from "./pagesUser/UserVideoGalleryPage.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
@@ -281,6 +282,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgetPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/image-gallery" element={<UserImageGalleryPage />} />
+          <Route path="/video-gallery" element={<UserVideoGalleryPage />} />
 
 
           {/*Admin Login Page*/}
