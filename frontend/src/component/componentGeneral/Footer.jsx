@@ -1,251 +1,301 @@
-import React, { useState } from "react";
-import GeneralInfoStore from "../../store/GeneralInfoStore.js";
+import React from "react";
+import { Phone, Mail, MapPin } from "lucide-react";
+import SocialMediaLink from "../componentGeneral/SocialMediaLink.jsx";
 import { Link } from "react-router-dom";
-
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-import NewsletterForm from "./NewsletterForm.jsx";
-
-import SocialMedia from "./SocialMedia.jsx";
-import Skeleton from "react-loading-skeleton";
-import useAuthUserStore from "../../store/AuthUserStore.js";
+import useGeneralInfoStore from "../../store/GeneralInfoStore.js";
+import ImageComponent from "./ImageComponent.jsx";
 
 const Footer = () => {
-  const { GeneralInfoList, GeneralInfoListLoading, GeneralInfoListError } =
-    GeneralInfoStore();
+  const year = new Date().getFullYear();
+  const mainMenus = [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Packages", href: "/packages" },
+    { label: "About Us", href: "/about-us" },
+    { label: "Registration", href: "/registration" },
+  ];
 
-  const { user, logout } = useAuthUserStore();
-  const [expanded, setExpanded] = useState(false);
+  const usefulLinks = [
+    { label: "FAQs", href: "/faqs" },
+    { label: "Image Gallery", href: "/image-gallery" },
+    { label: "Video Gallery", href: "/video-gallery" },
+    { label: "Contact Us", href: "/contact-us" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms and Conditions", href: "/terms-and-conditions" },
+  ];
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login"); // redirect to login page after logout
-  };
+  const { GeneralInfoList } = useGeneralInfoStore();
 
-  if (GeneralInfoListError) {
-    return (
-      <div className="primaryTextColor  container md:mx-auto text-center p-3">
-        <h1 className={"p-20"}>
-          Something went wrong! Please try again later.
-        </h1>
-      </div>
-    ); // Display error message
-  }
+  const location = GeneralInfoList?.CompanyAddress;
+
+  const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(location)}`;
+
   return (
-    <div>
-      {GeneralInfoListLoading ? (
-        <>
-          <div
-            className={
-              "grid grid-cols-2 md:grid-cols-4 gap-3 xl:container xl:mx-auto p-3"
-            }
+    <footer className="relative bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-950 text-white overflow-hidden">
+      {/* Islamic Geometric Pattern Background */}
+      <div className="absolute inset-0 opacity-5">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="islamic-pattern"
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M50 0 L75 25 L50 50 L25 25 Z M50 50 L75 75 L50 100 L25 75 Z M0 25 L25 50 L0 75 L-25 50 Z M100 25 L125 50 L100 75 L75 50 Z"
+                fill="none"
+                stroke="white"
+                strokeWidth="0.5"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="15"
+                fill="none"
+                stroke="white"
+                strokeWidth="0.5"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="25"
+                fill="none"
+                stroke="white"
+                strokeWidth="0.3"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#islamic-pattern)" />
+        </svg>
+      </div>
+
+      {/* Decorative Top Border - Islamic Arch Pattern */}
+      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500"></div>
+
+      {/* Decorative Geometric Border */}
+      <div className="absolute top-2 left-0 right-0 flex justify-center">
+        <svg
+          width="100%"
+          height="30"
+          xmlns="http://www.w3.org/2000/svg"
+          className="opacity-20"
+        >
+          <pattern
+            id="top-pattern"
+            x="0"
+            y="0"
+            width="60"
+            height="30"
+            patternUnits="userSpaceOnUse"
           >
-            <Skeleton height={200} width={"100%"} />
-            <Skeleton height={200} width={"100%"} />
-            <Skeleton height={200} width={"100%"} />
-            <Skeleton height={200} width={"100%"} />
+            <polygon
+              points="30,0 45,15 30,30 15,15"
+              fill="white"
+              opacity="0.3"
+            />
+          </pattern>
+          <rect width="100%" height="30" fill="url(#top-pattern)" />
+        </svg>
+      </div>
+
+      <div className="relative xl:container xl:mx-auto px-4">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-16">
+          {/* Logo & Social Media */}
+          <div className="flex flex-col gap-6">
+            {/* Decorative Frame */}
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-br from-amber-500/20 to-yellow-500/20 rounded-2xl blur-sm"></div>
+              <Link href="/" className="relative block">
+                <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border-2 border-amber-400/30 hover:border-amber-400/60 transition-all duration-300 hover:shadow-amber-500/20 hover:shadow-xl">
+                  <ImageComponent
+                    imageName={GeneralInfoList?.PrimaryLogo}
+                    altName={GeneralInfoList?.CompanyName}
+                    className="w-full cursor-pointer transition-transform duration-300 hover:scale-105"
+                  />
+
+                  {/* Decorative Corners */}
+                  <div className="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-amber-500/50 rounded-tl"></div>
+                  <div className="absolute top-1 right-1 w-4 h-4 border-t-2 border-r-2 border-amber-500/50 rounded-tr"></div>
+                  <div className="absolute bottom-1 left-1 w-4 h-4 border-b-2 border-l-2 border-amber-500/50 rounded-bl"></div>
+                  <div className="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-amber-500/50 rounded-br"></div>
+                </div>
+              </Link>
+            </div>
+
+            {/* Islamic Divider */}
+            <div className="flex items-center gap-2 my-2">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent"></div>
+              <div className="w-2 h-2 rotate-45 bg-amber-400/50"></div>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent"></div>
+            </div>
+
+            <SocialMediaLink />
           </div>
-          <Skeleton height={40} width={"100%"} />
-        </>
-      ) : (
-        <>
-          <div className={"secondaryBgColor accentTextColor  "}>
-            {" "}
-            {/*Mobile Footer*/}
-            <div className={" lg:hidden px-0 py-3"}>
-              {/* About Us */}
-              <Accordion
-                style={{
-                  background: "transparent",
-                  boxShadow: "none",
-                  width: "100%",
-                  color: "white",
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon className={"text-white"} />}
-                  aria-controls="panel1a-content"
-                >
-                  <Typography>About Us</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <div>
-                    <p>{GeneralInfoList?.ShortDescription}</p>
-                    <h1 className={"mb-3 mt-3"}>Follow Us</h1>
-                    <SocialMedia />
-                  </div>
-                </AccordionDetails>
-              </Accordion>
 
-              {/* Quick Links */}
-              <Accordion
-                style={{
-                  background: "transparent",
-                  boxShadow: "none",
-                  width: "100%",
-                  color: "white",
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon className={"text-white"} />}
-                  aria-controls="panel3a-content"
-                >
-                  <Typography>Quick Links</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <ul>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link to="/about">About</Link>
-                    </li>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link to="/blog">Blog</Link>
-                    </li>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link
-                        to="/contact-us"
-                        className={"hover:primaryTextColor"}
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link to="/termofservice">Terms of Services</Link>
-                    </li>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link to="/privacypolicy">Privacy Policy</Link>
-                    </li>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link to="/refundpolicy">Refund Policy</Link>
-                    </li>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link to="/shippinpolicy">Shipping Policy</Link>
-                    </li>
-                    <li className={"hover:primaryTextColor"}>
-                      <Link to="/faqs">FAQ</Link>
-                    </li>
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-
-              {/* Newsletter */}
-              <Accordion
-                style={{
-                  background: "transparent",
-                  boxShadow: "none",
-                  width: "100%",
-                  color: "white",
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon className={"text-white"} />}
-                  aria-controls="panel5a-content"
-                >
-                  <Typography>Newsletter</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <h1>
-                    Take advantage of our special offer. Do not worry, we would
-                    not spam you.
-                  </h1>
-                  <NewsletterForm />
-                </AccordionDetails>
-              </Accordion>
-              {/* Track Order */}
-              <Link
-                to="/track-order"
-                className="flex items-center gap-2 ml-4 pt-2 pb-2 "
-              >
-                <p>Track Your Order</p>              </Link>
+          {/* Main Menus */}
+          <div>
+            <div className="relative inline-block mb-6">
+              <h3 className="font-bold text-2xl text-amber-300 relative">
+                Main Menus
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-transparent rounded"></span>
+              </h3>
             </div>
-            {/*Desktop Footer*/}
-            <div
-              className={
-                "xl:container xl:mx-auto lg:grid grid-cols-1 lg:grid-cols-12 gap-10 justify-between py-10 px-6  hidden"
-              }
-            >
-              <div className={"col-span-6 relative"}>
-                <h1 className={"mb-3"}>
-                  About Us
-                  <span className="absolute left-0 top-6 w-15 border-b-2 border-gray-300 mt-1"></span>
-                </h1>
-                <p>{GeneralInfoList?.ShortDescription}</p>
-                <h1 className={"mb-3 mt-3"}>Follow Us</h1>
-                <SocialMedia />
-              </div>
+            <ul className="flex flex-col gap-3">
+              {mainMenus.map((menu, i) => (
+                <li key={i} className="group">
+                  <a
+                    href={menu.href}
+                    className="flex items-center gap-2 text-white/90 hover:text-amber-300 transition-all duration-300 hover:translate-x-2"
+                  >
+                    <span className="w-1.5 h-1.5 rotate-45 bg-amber-400/70 group-hover:bg-amber-300 transition-colors duration-300"></span>
+                    {menu.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-              <div className={"col-span-3 relative"}>
-                <h1 className={"mb-3"}>
-                  Quick Links
-                  <span className="absolute left-0 top-6 w-15 border-b-2 border-gray-300 mt-1"></span>
-                </h1>
-                <ul>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/about">About</Link>
-                  </li>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/blog">Blog</Link>
-                  </li>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/contact-us">Contact</Link>
-                  </li>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/termofservice">Terms of Services</Link>
-                  </li>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/privacypolicy">Privacy Policy</Link>
-                  </li>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/refundpolicy">Refund Policy</Link>
-                  </li>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/shippinpolicy">Shipping Policy</Link>
-                  </li>
-                  <li className={"hover:primaryTextColor"}>
-                    <Link to="/faqs">FAQ</Link>
-                  </li>
-                </ul>
-              </div>
-              {/*Newsletters*/}
-              <div className={"col-span-3 relative "}>
-                <h1 className={"mb-3"}>
-                  Newsletters
-                  <span className="absolute left-0 top-6 w-15 border-b-2 border-gray-200 mt-1"></span>
-                </h1>
-
-                <p>
-                  Take advantage of our special offer. Do not worry, we would
-                  not spam you
-                </p>
-                {/*Newsletters Form*/}
-                <NewsletterForm />
-              </div>
+          {/* Useful Links */}
+          <div>
+            <div className="relative inline-block mb-6">
+              <h3 className="font-bold text-2xl text-amber-300 relative">
+                Useful Links
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-transparent rounded"></span>
+              </h3>
             </div>
-            <div
-              className={
-                "text-center pb-5 pt-5 flex flex-col md:flex-row items-center justify-center gap-3"
-              }
-            >
-              <p>{GeneralInfoList?.FooterCopyright}</p>
-              <p>
-                Design and Developed by{" "}
-                <a
-                  href="https://www.digiweb.digital/"
-                  className={"text-red-500 hover:underline"}
-                >
-                  DigiWeb
-                </a>
-              </p>
+            <ul className="flex flex-col gap-3">
+              {usefulLinks.map((link, i) => (
+                <li key={i} className="group">
+                  <a
+                    href={link.href}
+                    className="flex items-center gap-2 text-white/90 hover:text-amber-300 transition-all duration-300 hover:translate-x-2"
+                  >
+                    <span className="w-1.5 h-1.5 rotate-45 bg-amber-400/70 group-hover:bg-amber-300 transition-colors duration-300"></span>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <div className="relative inline-block mb-6 ">
+              <h3 className="font-bold text-2xl text-amber-300 relative">
+                Contact Us
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-transparent rounded"></span>
+              </h3>
+            </div>
+            <div className="flex flex-col  gap-4">
+              <div className="group flex items-center gap-3 text-white/90 hover:text-amber-300 transition-all duration-300">
+                {/* Single Icon */}
+                <div className="p-2 bg-emerald-700/50 rounded-lg group-hover:bg-amber-500/20 transition-colors duration-300">
+                  <Phone className="w-4 h-4" />
+                </div>
+
+                {/* All Phone Numbers */}
+                <div className="flex flex-col gap-1 flex-1">
+                  {GeneralInfoList?.PhoneNumber?.map((phone, index) => (
+                    <a
+                      key={index}
+                      href={`tel:${phone}`}
+                      className="hover:underline"
+                    >
+                      {phone}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 text-white/90">
+                {/* The Single Icon */}
+                <div className="p-2 bg-emerald-700/50 rounded-lg">
+                  <Mail className="w-4 h-4 text-white" />
+                </div>
+
+                {/* The List of Emails */}
+                <div className="flex flex-col gap-2 flex-1">
+                  {GeneralInfoList?.CompanyEmail?.map((email, index) => (
+                    <a
+                      key={index}
+                      href={`mailto:${email}`}
+                      className="hover:text-amber-300 transition-all duration-300 text-sm md:text-base"
+                    >
+                      {email}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 text-white/90 hover:text-amber-300 transition-all duration-300"
+              >
+                <div className="mt-1 p-2 bg-emerald-700/50 rounded-lg group-hover:bg-amber-500/20 transition-colors duration-300">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <span className="flex-1">{location}</span>
+              </a>
             </div>
           </div>
-        </>
-      )}
-    </div>
+        </div>
+
+        {/* Decorative Middle Border */}
+        <div className="flex items-center gap-4 py-6">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-amber-400/30 to-amber-400/30"></div>
+          <div className="flex gap-2">
+            <div className="w-2 h-2 rotate-45 bg-amber-400/50"></div>
+            <div className="w-2 h-2 rotate-45 bg-amber-400/70"></div>
+            <div className="w-2 h-2 rotate-45 bg-amber-400/50"></div>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-r from-amber-400/30 to-transparent"></div>
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="pb-8 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/70 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-amber-400/50"></span>
+              <span>
+                © {year} {GeneralInfoList?.CompanyName}
+              </span>
+              <span className="w-1 h-1 rounded-full bg-amber-400/50"></span>
+            </div>
+            <div className="hidden sm:block text-amber-400/30">•</div>
+            <div className="flex items-center gap-2">
+              <span>Created with</span>
+              <svg
+                className="w-4 h-4 text-amber-400 animate-pulse"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>by</span>
+              <a
+                href="https://www.digiweb.digital/"
+                className="text-amber-300 hover:text-amber-200 font-medium transition-colors duration-300 hover:underline decoration-amber-400/50"
+              >
+                DigiWeb
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Decorative Border */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500"></div>
+    </footer>
   );
 };
 

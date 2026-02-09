@@ -73,7 +73,6 @@ export default function GeneralInfoForm() {
     setFormData({ ...formData, [field]: newArray });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = new FormData();
@@ -130,12 +129,12 @@ export default function GeneralInfoForm() {
             altName={formData.CompanyName}
             skeletonHeight={200}
           />
-          <ImageComponent
-            imageName={formData.SecondaryLogo}
-            className={"w-40"}
-            altName={formData.CompanyName}
-            skeletonHeight={200}
-          />
+          {/*<ImageComponent*/}
+          {/*  imageName={formData.SecondaryLogo}*/}
+          {/*  className={"w-40"}*/}
+          {/*  altName={formData.CompanyName}*/}
+          {/*  skeletonHeight={200}*/}
+          {/*/>*/}
           <ImageComponent
             imageName={formData.Favicon}
             className={"w-40"}
@@ -158,17 +157,17 @@ export default function GeneralInfoForm() {
             />
           </div>
 
-          <div>
-            <label className="block font-medium">Secondary Logo</label>
-            <Input
-              type="file"
-              name="SecondaryLogo"
-              onChange={handleFileChange}
-              accept="image/*"
-              fullWidth
-              margin="dense"
-            />
-          </div>
+          {/*<div>*/}
+          {/*  <label className="block font-medium">Secondary Logo</label>*/}
+          {/*  <Input*/}
+          {/*    type="file"*/}
+          {/*    name="SecondaryLogo"*/}
+          {/*    onChange={handleFileChange}*/}
+          {/*    accept="image/*"*/}
+          {/*    fullWidth*/}
+          {/*    margin="dense"*/}
+          {/*  />*/}
+          {/*</div>*/}
 
           <div>
             <label className="block font-medium">Favicon</label>
@@ -267,15 +266,15 @@ export default function GeneralInfoForm() {
           fullWidth
           margin="normal"
         />
-        <TextField
-          label="Short Description"
-          variant="outlined"
-          name="ShortDescription"
-          value={formData.ShortDescription}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
+        {/*<TextField*/}
+        {/*  label="Short Description"*/}
+        {/*  variant="outlined"*/}
+        {/*  name="ShortDescription"*/}
+        {/*  value={formData.ShortDescription}*/}
+        {/*  onChange={handleChange}*/}
+        {/*  fullWidth*/}
+        {/*  margin="normal"*/}
+        {/*/>*/}
         <TextField
           label="Company Address"
           variant="outlined"
@@ -294,60 +293,60 @@ export default function GeneralInfoForm() {
           fullWidth
           margin="normal"
         />
-        <TextField
-          label="Play Store Link"
-          variant="outlined"
-          name="PlayStoreLink"
-          value={formData.PlayStoreLink}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="App Store Link"
-          variant="outlined"
-          name="AppStoreLink"
-          value={formData.AppStoreLink}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Trade License"
-          variant="outlined"
-          name="TradeLicense"
-          value={formData.TradeLicense}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="TIN Number"
-          variant="outlined"
-          name="TINNumber"
-          value={formData.TINNumber}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="BIN Number"
-          variant="outlined"
-          name="BINNumber"
-          value={formData.BINNumber}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Footer Copyright"
-          variant="outlined"
-          name="FooterCopyright"
-          value={formData.FooterCopyright}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
+        {/*<TextField*/}
+        {/*  label="Play Store Link"*/}
+        {/*  variant="outlined"*/}
+        {/*  name="PlayStoreLink"*/}
+        {/*  value={formData.PlayStoreLink}*/}
+        {/*  onChange={handleChange}*/}
+        {/*  fullWidth*/}
+        {/*  margin="normal"*/}
+        {/*/>*/}
+        {/*<TextField*/}
+        {/*  label="App Store Link"*/}
+        {/*  variant="outlined"*/}
+        {/*  name="AppStoreLink"*/}
+        {/*  value={formData.AppStoreLink}*/}
+        {/*  onChange={handleChange}*/}
+        {/*  fullWidth*/}
+        {/*  margin="normal"*/}
+        {/*/>*/}
+        {/*<TextField*/}
+        {/*  label="Trade License"*/}
+        {/*  variant="outlined"*/}
+        {/*  name="TradeLicense"*/}
+        {/*  value={formData.TradeLicense}*/}
+        {/*  onChange={handleChange}*/}
+        {/*  fullWidth*/}
+        {/*  margin="normal"*/}
+        {/*/>*/}
+        {/*<TextField*/}
+        {/*  label="TIN Number"*/}
+        {/*  variant="outlined"*/}
+        {/*  name="TINNumber"*/}
+        {/*  value={formData.TINNumber}*/}
+        {/*  onChange={handleChange}*/}
+        {/*  fullWidth*/}
+        {/*  margin="normal"*/}
+        {/*/>*/}
+        {/*<TextField*/}
+        {/*  label="BIN Number"*/}
+        {/*  variant="outlined"*/}
+        {/*  name="BINNumber"*/}
+        {/*  value={formData.BINNumber}*/}
+        {/*  onChange={handleChange}*/}
+        {/*  fullWidth*/}
+        {/*  margin="normal"*/}
+        {/*/>*/}
+        {/*<TextField*/}
+        {/*  label="Footer Copyright"*/}
+        {/*  variant="outlined"*/}
+        {/*  name="FooterCopyright"*/}
+        {/*  value={formData.FooterCopyright}*/}
+        {/*  onChange={handleChange}*/}
+        {/*  fullWidth*/}
+        {/*  margin="normal"*/}
+        {/*/>*/}
 
         {/* Submit Button */}
 

@@ -1,13 +1,15 @@
 import React from "react";
 import { Facebook, MapPin } from "lucide-react";
-import { FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { FaWhatsapp, FaYoutube,FaInstagram } from "react-icons/fa";
 
 import useSocialMediaLinkStore from "../../store/SocialMediaLinkStore.js";
+import useGeneralInfoStore from "../../store/GeneralInfoStore.js";
 
 const SocialMediaLink = () => {
   const { socialMediaLinks } = useSocialMediaLinkStore();
 
-  const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(location)}`;
+  const {GeneralInfoList} = useGeneralInfoStore()
+
 
   const socialLinks = [
     {
@@ -15,20 +17,24 @@ const SocialMediaLink = () => {
       href: socialMediaLinks?.facebook,
       label: "Facebook",
     },
-
+    {
+      icon: FaInstagram,
+      href: socialMediaLinks?.instagram,
+      label: "Instagram",
+    },
     {
       icon: FaWhatsapp,
-      href: `https://wa.me/${socialMediaLinks?.facebook}`,
+      href: `https://wa.me/${socialMediaLinks?.whatsapp}`,
       label: "WhatsApp",
     },
     {
       icon: FaYoutube,
-      href: socialMediaLinks?.facebook,
+      href: socialMediaLinks?.youtube,
       label: "YouTube",
     },
     {
       icon: MapPin,
-      href: socialMediaLinks?.facebook,
+      href: GeneralInfoList?.GoogleMapLink,
       label: "Location",
     },
   ];

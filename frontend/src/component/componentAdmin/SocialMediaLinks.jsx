@@ -105,40 +105,40 @@ const SocialMediaLinks = () => {
       icon: <FaFacebook color="#1877F2" />,
       label: "Facebook",
     },
-    { key: "twitter", icon: <FaTwitter color="#1DA1F2" />, label: "Twitter" },
+    // { key: "twitter", icon: <FaTwitter color="#1DA1F2" />, label: "Twitter" },
     {
       key: "instagram",
       icon: <FaInstagram color="#E1306C" />,
       label: "Instagram",
     },
-    {
-      key: "linkedin",
-      icon: <FaLinkedin color="#0077B5" />,
-      label: "LinkedIn",
-    },
-    {
-      key: "messenger",
-      icon: <FaFacebookMessenger color="#00B2FF" />,
-      label: "Messenger",
-    },
+    // {
+    //   key: "linkedin",
+    //   icon: <FaLinkedin color="#0077B5" />,
+    //   label: "LinkedIn",
+    // },
+    // {
+    //   key: "messenger",
+    //   icon: <FaFacebookMessenger color="#00B2FF" />,
+    //   label: "Messenger",
+    // },
     {
       key: "whatsapp",
       icon: <FaWhatsapp color="#25D366" />,
       label: "WhatsApp",
     },
-    {
-      key: "telegram",
-      icon: <FaTelegram color="#0088CC" />,
-      label: "Telegram",
-    },
+    // {
+    //   key: "telegram",
+    //   icon: <FaTelegram color="#0088CC" />,
+    //   label: "Telegram",
+    // },
     { key: "youtube", icon: <FaYoutube color="#FF0000" />, label: "YouTube" },
-    { key: "tiktok", icon: <FaTiktok color="#000000" />, label: "TikTok" },
-    {
-      key: "pinterest",
-      icon: <FaPinterest color="#E60023" />,
-      label: "Pinterest",
-    },
-    { key: "viber", icon: <FaViber color="#7360F2" />, label: "Viber" },
+    // { key: "tiktok", icon: <FaTiktok color="#000000" />, label: "TikTok" },
+    // {
+    //   key: "pinterest",
+    //   icon: <FaPinterest color="#E60023" />,
+    //   label: "Pinterest",
+    // },
+    // { key: "viber", icon: <FaViber color="#7360F2" />, label: "Viber" },
   ];
 
   return (
