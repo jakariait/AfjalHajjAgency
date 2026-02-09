@@ -25,6 +25,7 @@ import WhatsAppButton from "./component/componentGeneral/WhatsAppButton.jsx";
 import ImageGalleryPage from "./pagesAdmin/ImageGalleryPage.jsx";
 import UserImageGalleryPage from "./pagesUser/UserImageGalleryPage.jsx";
 import UserVideoGalleryPage from "./pagesUser/UserVideoGalleryPage.jsx";
+import TestimonialsPage from "./pagesAdmin/TestimonialsPage.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
@@ -284,7 +285,6 @@ function App() {
           <Route path="/image-gallery" element={<UserImageGalleryPage />} />
           <Route path="/video-gallery" element={<UserVideoGalleryPage />} />
 
-
           {/*Admin Login Page*/}
           <Route path="/admin/login" element={<AdminLogin />} />
 
@@ -463,6 +463,7 @@ function App() {
             {/*<Route path="/admin/blogs/:id" element={<EditBlogPage />} />*/}
 
             <Route path="/admin/image-gallery" element={<ImageGalleryPage />} />
+            <Route path="/admin/testimonials" element={<TestimonialsPage />} />
           </Route>
 
           {/* Not Found */}

@@ -38,6 +38,7 @@ const pathaoController = require("../controllers/pathaoController");
 const pathaoConfigController = require("../controllers/pathaoConfigController");
 const ResultController = require("../controllers/ResultController");
 const videoLinkController = require("../controllers/VideoLinkController");
+const TestimonialController = require("../controllers/TestimonialController");
 
 
 const {
@@ -813,7 +814,6 @@ router.get("/blog/:id", blogController.getBlogById);
 router.post("/request-reset", PassWordResetController.requestPasswordReset);
 router.post("/reset-password", PassWordResetController.resetPasswordWithOTP);
 
-
 //  Routes for Image Gallery
 router.post(
   "/createresults",
@@ -844,5 +844,24 @@ router.delete(
   videoLinkController.deleteVideoLink,
 );
 
+// Routes for Testimonials
+
+router.post(
+  "/testimonials",
+  adminProtect,
+  TestimonialController.createTestimonial,
+);
+router.get("/testimonials", TestimonialController.getAllTestimonials);
+router.get("/testimonials/:id", TestimonialController.getTestimonialById);
+router.patch(
+  "/testimonials/:id",
+  adminProtect,
+  TestimonialController.updateTestimonial,
+);
+router.delete(
+  "/testimonials/:id",
+  adminProtect,
+  TestimonialController.deleteTestimonial,
+);
 
 module.exports = router;

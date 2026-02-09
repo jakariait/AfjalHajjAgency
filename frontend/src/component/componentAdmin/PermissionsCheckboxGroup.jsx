@@ -50,6 +50,7 @@ const PermissionsCheckboxGroup = ({
     { value: "blogs", label: "Blogs" },
     { value: "pathao_api", label: "Pathao API" },
     { value: "image_gallery", label: "Image Gallery" },
+    { value: "testimonial", label: "Testimonial" },
 
   ];
 
