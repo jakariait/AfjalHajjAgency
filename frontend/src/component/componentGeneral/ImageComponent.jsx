@@ -30,9 +30,12 @@ const ImageComponent = ({
           onLoad={() => setIsLoading(false)}
           onError={() => {
             setIsLoading(false);
-            setImageSrc(); // or keep blank
+            setImageSrc(""); // Set to empty string to indicate no image
           }}
         />
+      )}
+      {!imageSrc && !isLoading && (
+        <div className="image-not-found">Image not found</div>
       )}
     </div>
   );
