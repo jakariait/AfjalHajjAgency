@@ -1,5 +1,3 @@
-"use client"; // Required for client components in Next.js 13+
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
