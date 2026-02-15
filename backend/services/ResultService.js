@@ -4,8 +4,8 @@ const CarouselModel = require("../models/ResultModel");
 
 // Create Carousel
 
-const createCarousel = async (imgSrc) => {
-  return await CarouselModel.create({ imgSrc });
+const createCarousel = async (imgSrc, description) => {
+  return await CarouselModel.create({ imgSrc, description });
 };
 
 // Get All Carousel
@@ -40,8 +40,13 @@ const deleteCarousel = async (id) => {
   return await CarouselModel.findByIdAndDelete(id);
 };
 
+const updateResult = async (id, data) => {
+  return await CarouselModel.findByIdAndUpdate(id, data, { new: true });
+};
+
 module.exports = {
   createCarousel,
   getAllCarousels,
   deleteCarousel,
+  updateResult,
 };

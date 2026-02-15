@@ -72,7 +72,7 @@ const Gallery = ({ isHomePage = false }) => {
             (isHomePage ? brands.slice(0, 6) : brands).map((brand, i) => (
               <div
                 key={`${brand._id}-${i}`} // Use a combination for unique key
-                className="mb-4 overflow-hidden  transition-shadow duration-300 ease-in-out break-inside-avoid-column"
+                className="mb-4 overflow-hidden  transition-shadow duration-300 ease-in-out break-inside-avoid-column  shadow-md p-2 rounded-xl"
               >
                 <Image
                   src={`${baseUrl}/uploads/${brand.imgSrc}`}
@@ -82,6 +82,12 @@ const Gallery = ({ isHomePage = false }) => {
                   className="h-full w-full object-cover rounded-lg"
                   indicatorIcon={<Eye size={40} color="white" />} // Use Lucide Eye icon
                 />
+                {brand.description && (
+                  <p className={"text-primary font-bold"}>
+                    {brand.description}
+                  </p>
+                )}
+
               </div>
             ))
           ) : (

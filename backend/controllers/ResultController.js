@@ -7,7 +7,8 @@ const createCarousel = async (req, res) => {
     }
 
     const fileName = req.files.imgSrc[0].filename; // Store only file name
-    const carousel = await ResultService.createCarousel(fileName);
+    const { description } = req.body;
+    const carousel = await ResultService.createCarousel(fileName, description);
 
     res.status(201).json(carousel);
   } catch (error) {
@@ -36,8 +37,23 @@ const deleteByIdCarousel = async (req, res) => {
   }
 };
 
+const updateResult = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { description } = req.body;
+    const updatedResult = await ResultService.updateResult(id, { description });
+    if (!updatedResult) {
+      return res.status(404).json({ message: "Result not found" });
+    }
+    return res.status(200).json(updatedResult);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createCarousel,
   getAllCarousel,
   deleteByIdCarousel,
+  updateResult,
 };

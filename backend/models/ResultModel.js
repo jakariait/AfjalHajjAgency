@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const DataSchema = mongoose.Schema(
   {
     imgSrc: { type: String, required: true },
+    description: { type: String,  },
   },
   {
     timestamps: true,

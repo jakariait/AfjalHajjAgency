@@ -812,6 +812,12 @@ router.delete(
   ResultController.deleteByIdCarousel,
 );
 
+router.put(
+  "/updateresults/:id",
+  adminProtect,
+  ResultController.updateResult,
+);
+
 // Routes for Video Links
 router.post("/video-links", adminProtect, videoLinkController.createVideoLink);
 router.get("/video-links", videoLinkController.getAllVideoLinks);
