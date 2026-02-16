@@ -40,9 +40,9 @@ const clientUrl = process.env.CLIENT_URL
   : [];
 
 const corsOptions = {
-  origin: "*",
+  origin: clientUrl,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  credentials: false,
+  credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   exposedHeaders: ["Content-Length", "X-Favicon"],
 };
