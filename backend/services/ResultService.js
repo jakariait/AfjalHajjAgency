@@ -37,11 +37,11 @@ const deleteCarousel = async (id) => {
     }
   }
 
-  return await CarouselModel.findByIdAndDelete(id);
+  return CarouselModel.findByIdAndDelete(id);
 };
 
 const updateResult = async (id, data) => {
-  return await CarouselModel.findByIdAndUpdate(id, data, { new: true });
+  return CarouselModel.findByIdAndUpdate(id, data, {new: true});
 };
 
 module.exports = {
