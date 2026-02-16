@@ -2,6 +2,8 @@ const ResultService = require("../services/ResultService");
 
 const createCarousel = async (req, res) => {
   try {
+    console.log("createCarousel - req.body:", req.body);
+    console.log("createCarousel - req.files:", req.files);
     if (!req.files || !req.files.imgSrc) {
       return res.status(400).json({ message: "Image file is required" });
     }
@@ -39,6 +41,8 @@ const deleteByIdCarousel = async (req, res) => {
 
 const updateResult = async (req, res) => {
   try {
+    console.log("updateResult - req.params:", req.params);
+    console.log("updateResult - req.body:", req.body);
     const { id } = req.params;
     const { description } = req.body;
     const updatedResult = await ResultService.updateResult(id, { description });
