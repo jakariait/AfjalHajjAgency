@@ -812,7 +812,7 @@ router.delete(
   ResultController.deleteByIdCarousel,
 );
 
-router.put(
+router.post(
   "/updateresults/:id",
   adminProtect,
   ResultController.updateResult,

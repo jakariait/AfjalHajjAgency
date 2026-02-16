@@ -77,7 +77,7 @@ const BrandUpload = () => {
   const handleDescriptionUpdate = async (imageId, newDescription) => {
     try {
       setLoading(true);
-      await axios.put(
+      await axios.post(
         `${apiUrl}/updateresults/${imageId}`,
         { description: newDescription },
         {

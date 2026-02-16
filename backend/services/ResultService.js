@@ -11,7 +11,7 @@ const createCarousel = async (imgSrc, description) => {
 // Get All Carousel
 
 const getAllCarousels = async () => {
-  return await CarouselModel.find();
+  return CarouselModel.find();
 };
 
 // Delete Carousel
