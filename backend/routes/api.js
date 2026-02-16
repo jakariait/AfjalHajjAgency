@@ -814,6 +814,7 @@ router.delete(
 
 router.put(
   "/updateresults/:id",
+  adminProtect,
   ResultController.updateResult,
 );
 
