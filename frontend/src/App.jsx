@@ -31,15 +31,6 @@ import UserPackagePage from "./pagesUser/UserPackagePage.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
-const SubscribedUsersPage = lazy(
-  () => import("./pagesAdmin/SubscribedUsersPage.jsx"),
-);
-const SliderBannerPage = lazy(
-  () => import("./pagesAdmin/SliderBannerPage.jsx"),
-);
-const ColorUpdaterPage = lazy(
-  () => import("./pagesAdmin/ColorUpdaterPage.jsx"),
-);
 const SocialLinkUpdaterPage = lazy(
   () => import("./pagesAdmin/SocialLinkUpdaterPage.jsx"),
 );
@@ -135,8 +126,6 @@ const BkashCallbackPage = lazy(
   () => import("./pagesUser/BkashCallbackPage.jsx"),
 );
 const CouponPage = lazy(() => import("./pagesAdmin/CouponPage.jsx"));
-const AboutUsPage = lazy(() => import("./pagesAdmin/AboutUsPage.jsx"));
-const TermsPage = lazy(() => import("./pagesAdmin/TermsPage.jsx"));
 const AboutUsPageUser = lazy(() => import("./pagesUser/AboutUsPageUser.jsx"));
 const TosPage = lazy(() => import("./pagesUser/TosPage.jsx"));
 const PrivacyPolicyPage = lazy(
@@ -174,9 +163,6 @@ const TrackOrderPage = lazy(() => import("./pagesUser/TrackOrderPage.jsx"));
 const AdminListPage = lazy(() => import("./pagesAdmin/AdminListPage.jsx"));
 const CreateAdminPage = lazy(() => import("./pagesAdmin/CreateAdminPage.jsx"));
 const EditAdminPage = lazy(() => import("./pagesAdmin/EditAdminPage.jsx"));
-const CreateBlogPage = lazy(() => import("./pagesAdmin/CreateBlogPage.jsx"));
-const BlogsListPage = lazy(() => import("./pagesAdmin/BlogsListPage.jsx"));
-const EditBlogPage = lazy(() => import("./pagesAdmin/EditBlogPage.jsx"));
 const BlogsPage = lazy(() => import("./pagesUser/BlogsPage.jsx"));
 const BlogDetailsPage = lazy(() => import("./pagesUser/BlogDetailsPage.jsx"));
 const ForgetPasswordPage = lazy(
@@ -309,19 +295,10 @@ function App() {
           {/* Protected Admin Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/admin/general-info" element={<GeneralInfoPage />} />
-            {/*<Route*/}
-            {/*  path="/admin/subscribed-users"*/}
-            {/*  element={<SubscribedUsersPage />}*/}
-            {/*/>*/}
-            {/*<Route path="/admin/color-updater" element={<ColorUpdaterPage />} />*/}
             <Route
               path="/admin/social-link-updater"
               element={<SocialLinkUpdaterPage />}
             />
-            {/*<Route*/}
-            {/*  path="/admin/sliders-banners"*/}
-            {/*  element={<SliderBannerPage />}*/}
-            {/*/>*/}
             <Route
               path="/admin/contact-request"
               element={<ContactRequestPage />}
@@ -435,10 +412,7 @@ function App() {
             />
 
             <Route path="/admin/orders/:orderId" element={<ViewOrderPage />} />
-
             <Route path="/admin/coupon" element={<CouponPage />} />
-            {/*<Route path="/admin/about-us" element={<AboutUsPage />} />*/}
-            {/*<Route path="/admin/terms-policies" element={<TermsPage />} />*/}
             <Route path="/admin/faqs" element={<AdminFAQSPage />} />
             <Route path="/admin/scroll-text" element={<MarqueeAdminPage />} />
             <Route path="/admin/homepage-seo" element={<AdminMetaPage />} />
@@ -459,12 +433,6 @@ function App() {
               path="/admin/incomplete-order"
               element={<AbandonedCartPage />}
             />
-            {/*<Route path="/admin/create-blog" element={<CreateBlogPage />} />*/}
-
-            {/*<Route path="/admin/blogs" element={<BlogsListPage />} />*/}
-
-            {/*<Route path="/admin/blogs/:id" element={<EditBlogPage />} />*/}
-
             <Route path="/admin/image-gallery" element={<ImageGalleryPage />} />
             <Route path="/admin/testimonials" element={<TestimonialsPage />} />
             <Route path="/admin/packages" element={<AdminPackagePage />} />
