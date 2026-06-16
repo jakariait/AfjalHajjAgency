@@ -5,6 +5,7 @@ const googleTagManagerSchema = new mongoose.Schema(
     googleTagManagerId: {
       type: String,
       default: "",
+      trim: true,
     },
     isActive: {
       type: Boolean,

@@ -599,7 +599,7 @@ const Packages = ({ isHomePage = false }) => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.9 }}
                   >
-                    <Link to="/registration">
+                    <Link to="/contact-us">
                       <motion.button
                         className="group/btn cursor-pointer relative w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg overflow-hidden"
                         whileHover={{

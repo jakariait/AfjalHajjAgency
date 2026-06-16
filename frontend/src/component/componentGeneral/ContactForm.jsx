@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Send } from "lucide-react";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 const ContactForm = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    service: "",
+    address: "",
     message: "",
   });
 
   const [successMsg, setSuccessMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState(""); // New state for error messages
+  const [errorMsg, setErrorMsg] = useState("");
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
   const [formIsValid, setFormIsValid] = useState(false);
 
   const handleInputChange = (e) => {
@@ -23,11 +25,44 @@ const ContactForm = () => {
       ...prev,
       [name]: value,
     }));
-    // Clear the error for the current field
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handlePhoneChange = (value) => {
+    setFormData((prev) => ({ ...prev, phone: value || "" }));
+    if (errors.phone) {
+      setErrors((prev) => ({ ...prev, phone: "" }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    validateSingleField(name);
+  };
+
+  const handlePhoneBlur = () => {
+    setTouched((prev) => ({ ...prev, phone: true }));
+    validateSingleField("phone");
+  };
+
+  const validateSingleField = (fieldName) => {
+    const value = typeof formData[fieldName] === "string" ? formData[fieldName].trim() : formData[fieldName] || "";
+    let error = "";
+
+    if (fieldName === "name") {
+      if (!value) error = "পূর্ণ নাম আবশ্যক!";
+      else if (value.length < 3) error = "নাম কমপক্ষে ৩ অক্ষর হতে হবে!";
+    } else if (fieldName === "phone") {
+      if (!value) error = "ফোন নম্বর আবশ্যক!";
+    } else if (fieldName === "address") {
+      if (!value) error = "ঠিকানা আবশ্যক!";
+      else if (value.length < 5) error = "ঠিকানা কমপক্ষে ৫ অক্ষর হতে হবে!";
+    }
+
+    setErrors((prev) => ({ ...prev, [fieldName]: error }));
   };
 
   const validateForm = (setFieldErrors = true) => {
@@ -42,25 +77,19 @@ const ContactForm = () => {
       newErrors.phone = "ফোন নম্বর আবশ্যক!";
       isValid = false;
     }
-    if (!formData.message.trim()) {
-      newErrors.message = "বার্তা আবশ্যক!";
+    if (!formData.address.trim()) {
+      newErrors.address = "ঠিকানা আবশ্যক!";
       isValid = false;
     }
 
     if (setFieldErrors) {
       setErrors(newErrors);
+      setTouched({ name: true, phone: true, address: true });
     }
     return isValid;
   };
   useEffect(() => {
-    setFormData((prev) => ({
-      ...prev,
-      service: prev.service || "hajj-umrah", // Ensure service has a default value
-    }));
-  }, []);
-
-  useEffect(() => {
-    setFormIsValid(validateForm(false)); // Validate without setting errors
+    setFormIsValid(validateForm(false));
   }, [formData]);
 
       const handleSubmit = async (e) => {
@@ -76,8 +105,7 @@ const ContactForm = () => {
       const payload = {
         fullName: formData.name,
         phoneNumber: formData.phone,
-        emailAddress: formData.email,
-        services: formData.service,
+        address: formData.address,
         message: formData.message,
       };
   
@@ -93,18 +121,16 @@ const ContactForm = () => {
           gtmPushEvent("form_submission", {
             formType: "ContactForm",
             fullName: formData.name,
-            email: formData.email,
             phone: formData.phone,
-            service: formData.service,
+            address: formData.address,
             message: formData.message,
           });
   
                   setSuccessMsg("✅ আপনার বার্তা সফলভাবে পাঠানো হয়েছে!");
                   setFormData({
                     name: "",
-                    email: "",
                     phone: "",
-                    service: "hajj-umrah", // Reset service to default
+                    address: "",
                     message: "",
                   });
           
@@ -130,6 +156,71 @@ const ContactForm = () => {
           
             return (
               <div className="group relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-900 rounded-2xl p-8 shadow-2xl overflow-hidden">
+              <style>{`
+                .phone-input {
+                  display: flex;
+                  align-items: center;
+                  gap: 0;
+                }
+                .phone-input .PhoneInputCountry {
+                  background: rgba(255,255,255,0.95);
+                  backdrop-filter: blur(4px);
+                  border: 2px solid rgba(52,211,153,0.5);
+                  border-right: none;
+                  border-radius: 12px 0 0 12px;
+                  padding: 10px 8px 10px 14px;
+                  margin: 0;
+                  transition: all 0.3s;
+                  cursor: pointer;
+                }
+                .phone-input .PhoneInputCountry:hover {
+                  background: rgba(255,255,255,1);
+                }
+                .phone-input .PhoneInputCountrySelect {
+                  cursor: pointer;
+                }
+                .phone-input .PhoneInputCountryIcon {
+                  box-shadow: none;
+                }
+                .phone-input .PhoneInputCountryIcon--border {
+                  box-shadow: none;
+                }
+                .phone-input .PhoneInputInput {
+                  width: 100%;
+                  padding: 12px 16px;
+                  background: rgba(255,255,255,0.95);
+                  backdrop-filter: blur(4px);
+                  border: 2px solid rgba(52,211,153,0.5);
+                  border-left: none;
+                  border-radius: 0 12px 12px 0;
+                  font-size: 16px;
+                  color: #064e3b;
+                  outline: none;
+                  transition: all 0.3s;
+                }
+                .phone-input .PhoneInputInput:focus {
+                  border-color: #f59e0b;
+                  box-shadow: 0 0 0 2px rgba(245,158,11,0.2);
+                }
+                .phone-input:focus-within .PhoneInputCountry {
+                  border-color: #f59e0b;
+                }
+                .phone-input-error .PhoneInputInput,
+                .phone-input-error .PhoneInputCountry {
+                  border-color: #f87171 !important;
+                }
+                .phone-input-error .PhoneInputCountry {
+                  border-right: none !important;
+                }
+                .phone-input-error .PhoneInputInput:focus {
+                  border-color: #ef4444 !important;
+                  box-shadow: 0 0 0 2px rgba(239,68,68,0.2) !important;
+                }
+                .phone-input-error:focus-within .PhoneInputCountry {
+                  border-color: #ef4444 !important;
+                  border-right: none !important;
+                }
+              `}</style>
                 {/* Decorative Pattern Background */}
                 <div className="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.08] transition-opacity duration-300">
                   <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -187,36 +278,46 @@ const ContactForm = () => {
                           required
                           value={formData.name}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 placeholder-gray-400"
+                          onBlur={handleBlur}
+                          className={`w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 rounded-xl focus:outline-none focus:ring-2 transition-all duration-300 text-emerald-900 placeholder-gray-400 ${touched.name && errors.name ? "border-red-400 focus:border-red-500 focus:ring-red-500/20" : "border-emerald-300/50 focus:border-amber-400 focus:ring-amber-400/20"}`}
                           placeholder="আপনার পূর্ণ নাম লিখুন"
                         />
-                        {errors.name && (
-                          <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                        {touched.name && errors.name && (
+                          <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
+                            <span>⚠️</span> {errors.name}
+                          </p>
                         )}
                         {/* Decorative corners */}
-                        <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
-                        <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
+                        <div className={`absolute top-1 left-1 w-2 h-2 border-t border-l rounded-tl pointer-events-none ${touched.name && errors.name ? "border-red-400/60" : "border-emerald-300/30"}`}></div>
+                        <div className={`absolute bottom-1 right-1 w-2 h-2 border-b border-r rounded-br pointer-events-none ${touched.name && errors.name ? "border-red-400/60" : "border-emerald-300/30"}`}></div>
                       </div>
                     </div>
           
-                    {/* Email Field */}
+                    {/* Address Field */}
                     <div>
                       <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
-                        ইমেইল ঠিকানা
+                        ঠিকানা *
                       </label>
                       <div className="relative">
                         <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
+                          type="text"
+                          name="address"
+                          required
+                          value={formData.address}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 placeholder-gray-400"
-                          placeholder="আপনার ইমেইল ঠিকানা লিখুন"
+                          onBlur={handleBlur}
+                          className={`w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 rounded-xl focus:outline-none focus:ring-2 transition-all duration-300 text-emerald-900 placeholder-gray-400 ${touched.address && errors.address ? "border-red-400 focus:border-red-500 focus:ring-red-500/20" : "border-emerald-300/50 focus:border-amber-400 focus:ring-amber-400/20"}`}
+                          placeholder="আপনার ঠিকানা লিখুন"
                         />
+                        {touched.address && errors.address && (
+                          <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
+                            <span>⚠️</span> {errors.address}
+                          </p>
+                        )}
                         {/* Decorative corners */}
-                        <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
-                        <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
+                        <div className={`absolute top-1 left-1 w-2 h-2 border-t border-l rounded-tl pointer-events-none ${touched.address && errors.address ? "border-red-400/60" : "border-emerald-300/30"}`}></div>
+                        <div className={`absolute bottom-1 right-1 w-2 h-2 border-b border-r rounded-br pointer-events-none ${touched.address && errors.address ? "border-red-400/60" : "border-emerald-300/30"}`}></div>
                       </div>
                     </div>
           
@@ -227,53 +328,30 @@ const ContactForm = () => {
                         ফোন নম্বর *
                       </label>
                       <div className="relative">
-                        <input
-                          type="tel"
-                          name="phone"
+                        <PhoneInput
+                          international
+                          defaultCountry="BD"
                           value={formData.phone}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 placeholder-gray-400"
+                          onChange={handlePhoneChange}
+                          onBlur={handlePhoneBlur}
+                          className={`phone-input ${touched.phone && errors.phone ? "phone-input-error" : ""}`}
                           placeholder="আপনার ফোন নম্বর লিখুন"
                         />
-                        {errors.phone && (
-                          <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                        {touched.phone && errors.phone && (
+                          <p className="text-red-400 text-sm mt-1 flex items-center gap-1">
+                            <span>⚠️</span> {errors.phone}
+                          </p>
                         )}
-                        {/* Decorative corners */}
-                        <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
-                        <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
                       </div>
                     </div>
           
-                    {/* Service Selection */}
-                    <div>
-                      <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
-                        সেবা নির্বাচন করুন
-                      </label>
-                      <div className="relative">
-                        <select
-                          name="service"
-                          value={formData.service}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-emerald-300/50 rounded-xl focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all duration-300 text-emerald-900 cursor-pointer"
-                        >
-                          <option value="hajj-umrah">হজ ও ওমরাহ</option>
-                          <option value="hajj">হজ প্যাকেজ</option>
-                          <option value="umrah">ওমরাহ প্যাকেজ</option>
-                          <option value="visa">ভিসা সেবা</option>
-                          <option value="other">অন্যান্য</option>
-                        </select>
-                        {/* Decorative corners */}
-                        <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-emerald-300/30 rounded-tl pointer-events-none"></div>
-                        <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-emerald-300/30 rounded-br pointer-events-none"></div>
-                      </div>
-                    </div>
+
           
                     {/* Message Field */}
                     <div>
                       <label className="block text-amber-300 font-semibold mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rotate-45 bg-amber-400"></span>
-                        বার্তা *
+                        বার্তা
                       </label>
                       <div className="relative">
                         <textarea
@@ -297,7 +375,7 @@ const ContactForm = () => {
                     <button
                       onClick={handleSubmit}
                       disabled={!formIsValid}
-                      className={`group/btn relative w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-amber-500/50 overflow-hidden
+                      className={`group/btn relative w-full font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 overflow-hidden ${formIsValid ? "bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-amber-500/50" : "bg-gray-400 text-gray-200 cursor-not-allowed shadow"}
                       `}
                     >
                       {/* Shimmer Effect */}

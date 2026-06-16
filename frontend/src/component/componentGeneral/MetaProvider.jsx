@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import ReactGA from "react-ga4";
 
 const MetaProvider = () => {
   const [meta, setMeta] = useState(null);
@@ -29,8 +28,9 @@ const MetaProvider = () => {
 
   // Track pageview on route change
   useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "virtual_page_view",
       page: location.pathname + location.search,
     });
   }, [location]);
