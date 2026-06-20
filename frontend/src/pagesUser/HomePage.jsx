@@ -15,14 +15,14 @@ const HomePage = () => {
       <HajjHero />
       <Services
         selectedServices={[
-          "ভিসা প্রসেসিং",
-          "এয়ার টিকিট বুকিং",
-          "মানসম্মত হোটেল",
+          "হজ্জ ও উমরাহ ভিসা প্রসেসিং",
+          "হজ্জ ও উমরাহ ফ্লাইট বুকিং",
+          "মক্কা ও মদিনায় আবাসন সুবিধা",
         ]}
         isHomePage={true}
       />
-      <Package isHomePage={true}  />
-      <HomePageProducts/>
+      <Package isHomePage={true} />
+      <HomePageProducts />
       <Gallery isHomePage={true} />
       <VideoGallery isHomePage={true} />
       <Testimonial />

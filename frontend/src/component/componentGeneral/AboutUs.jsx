@@ -7,12 +7,13 @@ const AboutUs = () => {
   const { GeneralInfoList } = useGeneralInfoStore();
 
   const services = [
-    "সৌদি ভিসা প্রসেসিং",
-    "ওমরাহ প্যাকেজ (সিজন অনুযায়ী)",
-    "হজ প্যাকেজ (সাধারণ ও ভিআইপি)",
-    "হোটেল ও ফ্লাইট বুকিং",
-    "গাইড ও ইবাদত সহায়তা",
-    "হজ ও ওমরাহ প্রশিক্ষণ সেশন",
+    "২০ বছরের অভিজ্ঞ টিমের সার্বক্ষণিক তত্ত্বাবধান ও শরয়ী পরামর্শ",
+    "অভিজ্ঞ আলেমদের মাধ্যমে নিয়মিত হজ্জ প্রশিক্ষণ",
+    "প্রতিদিন ৩ বেলা মানসম্মত বাঙালি খাবারের ব্যবস্থা",
+    " মক্কা ও মদিনায় উন্নতমানের ৩/৪ স্টার হোটেলে আবাসনের ব্যবস্থা (প্রতি কক্ষে ২/৩ জন)",
+    "সৌদি এয়ারলাইন্সে যাতায়াত এবং হজ্জ ফ্লাইট শুরু হওয়ার ১ম দিনেই  সৌদি আরব গমনের ব্যবস্থা",
+    "মক্কা ও মদিনার ঐতিহাসিক ও গুরুত্বপূর্ণ স্থানসমূহ জিয়ারাহ",
+    "মিনা ও আরাফায় উন্নতমানের তাঁবু, আধুনিক ট্রেন ও পরিবহন সুবিধা",
   ];
 
   return (
@@ -92,9 +93,11 @@ const AboutUs = () => {
               <div className="relative bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 px-12 py-8 rounded-3xl shadow-2xl border-2 border-amber-400/50">
                 <div className="text-center">
                   <p className="text-amber-300 text-lg font-semibold mb-2">
-                    হজ ব্যবস্থাপনায় আমাদের অভিজ্ঞতা
+                    আল্লাহর মেহমানদের সেবায়
                   </p>
-                  <p className="text-white text-6xl font-bold">৩ দশকের</p>
+                  <p className="text-white text-6xl font-bold">
+                    ২০ বছরের পথচলা
+                  </p>
                 </div>
                 {/* Decorative corners */}
                 <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-amber-400/50 rounded-tl"></div>
@@ -121,14 +124,16 @@ const AboutUs = () => {
               {/* Description */}
               <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
                 <p>
+                  দীর্ঘ দুই দশক ধরে উত্তরবঙ্গসহ সারা দেশের হাজীদের বিশ্বস্ত
+                  কাফেলা{" "}
                   <strong className="text-emerald-900">
                     {GeneralInfoList?.CompanyName}
                   </strong>
-                  একটি বিশ্বস্ত ও আন্তরিক প্রতিষ্ঠান, যা বাংলাদেশ থেকে হজ ও
-                  ওমরাহ পালনে আগ্রহী মুসলমানদের জন্য নির্ভরযোগ্য সেবা নিশ্চিত
-                  করতে প্রতিশ্রুতিবদ্ধ। আমরা অভিজ্ঞ গাইড, নির্ভরযোগ্য যাত্রা
-                  পরিকল্পনা, আধুনিক সুবিধাসম্পন্ন হোটেল বুকিং এবং আরামদায়ক
-                  পরিবহনসহ হজ ও ওমরাহ যাত্রীদের সেবা প্রদান করে থাকি।
+                  । হজ্জ ও ওমরাহ কেবল কোনো সফর নয়, এটি একটি পবিত্র ইবাদত। আর তাই
+                  আপনার এই আধ্যাত্মিক যাত্রাকে মশগুল ও নির্বিঘ্ন করতে আমাদের ২০
+                  বছরের অভিজ্ঞতাকে কাজে লাগিয়ে প্রদান করি সঠিক দিকনির্দেশনা,
+                  উন্নত হোটেল সুবিধা ও নির্ভরযোগ্য গাইডলাইন। আল্লাহর মেহমানদের
+                  সেবাকে আমরা একটি পবিত্র দায়িত্ব মনে করি।
                 </p>
 
                 {/* Services List */}
@@ -148,8 +153,7 @@ const AboutUs = () => {
                 </div>
 
                 <p className="text-center text-xl font-semibold text-emerald-800 pt-4">
-                  আমাদের সাথে থাকুন – আপনার ইবাদত হোক প্রশান্তিময়, নিরাপদ ও
-                  সুন্দর।
+                  আপনার ইবাদত হোক কবুল, সফর হোক নিরাপদ ও পুণ্যময়।
                 </p>
               </div>
 
@@ -227,11 +231,12 @@ const AboutUs = () => {
             <div className="relative bg-white/10 backdrop-blur-sm p-8 rounded-2xl border-2 border-amber-400/30 hover:border-amber-400/60 transition-all duration-300">
               <h3 className="text-3xl font-bold text-amber-300 mb-6 flex items-center gap-3">
                 <span className="w-2 h-2 rotate-45 bg-amber-400"></span>
-                আমাদের দৃষ্টিভঙ্গি
+                আমাদের আদর্শ ও সেবা
               </h3>
               <p className="text-white/90 text-lg leading-relaxed">
-                আমরা বিশ্বাস করি, হজ ও ওমরাহ একটি মহান দায়িত্ব ও ইবাদত – আর এই
-                পথচলায় আমরা আপনার বিশ্বস্ত সহযাত্রী হতে চাই।
+                হজ্জ ও ওমরাহ একটি মহান ইবাদত ও পবিত্র দায়িত্ব। আল্লাহর মেহমানদের
+                এই পুণ্যময় পথচলায় সর্বোচ্চ সততা ও আন্তরিকতার সাথে তাদের আজীবনের
+                বিশ্বস্ত সহযাত্রী হওয়াই আমাদের
               </p>
               {/* Decorative corners */}
               <div className="absolute top-2 left-2 w-5 h-5 border-t-2 border-l-2 border-amber-400/50 rounded-tl"></div>
@@ -242,12 +247,12 @@ const AboutUs = () => {
             <div className="relative bg-white/10 backdrop-blur-sm p-8 rounded-2xl border-2 border-amber-400/30 hover:border-amber-400/60 transition-all duration-300">
               <h3 className="text-3xl font-bold text-amber-300 mb-6 flex items-center gap-3">
                 <span className="w-2 h-2 rotate-45 bg-amber-400"></span>
-                আমাদের লক্ষ্য
+                আমাদের মূল উদ্দেশ্য
               </h3>
               <p className="text-white/90 text-lg leading-relaxed">
-                এটি শুধু একটি সফর নয়, বরং একটি আধ্যাত্মিক অভিজ্ঞতা নিশ্চিত করা
-                – যাতে আপনি পূর্ণ মনোযোগে ইবাদত করতে পারেন এবং ফিরে আসেন আত্মিক
-                শান্তি ও পরিতৃপ্তি নিয়ে।
+                আপনার ইবাদতের সফরকে দুশ্চিন্তামুক্ত ও আরামদায়ক করা। সব লজিস্টিক
+                ঝামেলা সামলে আপনাকে এমন পরিবেশ দেওয়া, যেন আপনি পূর্ণ একাগ্রতায়
+                ইবাদত শেষে আত্মিক শান্তি নিয়ে ফিরতে পারেন।
               </p>
               {/* Decorative corners */}
               <div className="absolute top-2 left-2 w-5 h-5 border-t-2 border-l-2 border-amber-400/50 rounded-tl"></div>
@@ -265,14 +270,14 @@ const AboutUs = () => {
         <div className="xl:container xl:mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4 relative inline-block">
-              স্বীকৃতির সুরক্ষা,{" "}
+              বৈধতার নিশ্চয়তা,{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600">
-                সেবার নিশ্চয়তা
+                নিরাপদ সেবার আস্থা
               </span>
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-56 h-1 bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500 rounded-full"></div>
             </h2>
             <p className="text-xl text-gray-700 mt-6">
-              সরকার অনুমোদিত একটি বিশ্বস্ত হজ ও ওমরাহ সেবাদাতা প্রতিষ্ঠান
+              বাংলাদেশ ও সৌদি সরকার অনুমোদিত একটি বিশ্বস্ত হজ্জ ও ওমরাহ এজেন্সি
             </p>
           </div>
 
@@ -282,12 +287,11 @@ const AboutUs = () => {
                 <strong className="text-emerald-900">
                   {GeneralInfoList?.CompanyName}
                 </strong>{" "}
-                বাংলাদেশ সরকার, ধর্ম মন্ত্রণালয় এবং সৌদি আরবের সংশ্লিষ্ট
-                কর্তৃপক্ষের অনুমোদিত একটি লাইসেন্সপ্রাপ্ত হজ ও ওমরাহ
-                পরিচালনাকারী প্রতিষ্ঠান। আমাদের রয়েছে যথাযথ ট্রাভেল এজেন্সি
-                লাইসেন্স, হজ এজেন্সি নিবন্ধন এবং সৌদি ওমরাহ অপারেটর অনুমোদন।
-                আপনার আস্থা ও নিরাপদ হজযাত্রা নিশ্চিত করতেই আমরা প্রতিটি ধাপ
-                অতিক্রম করি সম্পূর্ণ স্বচ্ছতা ও বৈধতার সঙ্গে।
+                বাংলাদেশ ধর্ম মন্ত্রণালয় ও সৌদি সরকার অনুমোদিত একটি সম্পূর্ণ বৈধ
+                ও লাইসেন্সপ্রাপ্ত হজ্জ-ওমরাহ কাফেলা। আমাদের রয়েছে নিজস্ব ট্রাভেল
+                লাইসেন্স, হজ্জ নিবন্ধন এবং সৌদি অপারেটর অনুমোদন। আল্লাহর
+                মেহমানদের নিরাপদ ও নিখুঁত হজ্জযাত্রা নিশ্চিত করতে আমরা প্রতিটি
+                প্রশাসনিক ধাপ শতভাগ সততা ও স্বচ্ছতার সাথে সম্পন্ন করি।
               </p>
 
               {/* Decorative corners */}

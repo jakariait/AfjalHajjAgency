@@ -91,9 +91,9 @@ export default function HajjHero() {
           className={`font-noto-serif-bengali text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 transition-all duration-1000 delay-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           style={{ textShadow: "0 4px 20px rgba(0, 0, 0, 0.7)" }}
         >
-          পবিত্র হজ্জের সফর
+          আপনোর হজ্জ
           <br />
-          আপনার হাতের মুঠোয়
+          আমাদের দায়িত্ব
         </h1>
 
         {/* Subtitle */}
@@ -101,8 +101,7 @@ export default function HajjHero() {
           className={`font-noto-serif-bengali text-xl md:text-3xl leading-relaxed mb-12 text-stone-100 max-w-4xl mx-auto transition-all duration-1000 delay-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           style={{ textShadow: "0 2px 15px rgba(0, 0, 0, 0.6)" }}
         >
-          বিশ্বস্ত সেবা এবং সম্পূর্ণ গাইডেন্সের সাথে আল্লাহর ঘরে যাওয়ার স্বপ্ন
-          পূরণ করুন। আমরা আপনার পাশে আছি প্রতিটি পদক্ষেপে।
+          বিশ্বস্ত সেবা, অভিজ্ঞ গাইড ও সার্বক্ষণিক তত্ত্বাবধানে সম্পন্ন করুন আপনার পবিত্র হজ্জ । আমরা আছি আপনার পাশে প্রতিটি পদক্ষেপ ।
         </p>
 
         {/* CTA Buttons */}
@@ -120,7 +119,7 @@ export default function HajjHero() {
           <Link to="/contact-us">
             <button className="group cursor-pointer relative px-12 py-4 text-xl font-semibold font-noto-serif-bengali rounded-full bg-transparent text-white border-2 border-amber-400 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)] hover:bg-amber-400/15 transition-all duration-300 hover:-translate-y-1">
               <span className="absolute inset-0 w-0 h-0 rounded-full bg-white/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group-hover:w-[400px] group-hover:h-[400px]" />
-              <span className="relative z-10">যোগাযোগ করুন</span>
+              <span className="relative z-10">এখনই যোগাযোগ করুন</span>
             </button>
           </Link>
         </div>
