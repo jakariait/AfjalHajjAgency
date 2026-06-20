@@ -46,6 +46,7 @@ export default defineConfig(async () => {
       chunkSizeWarningLimit: 1000,
       rolldownOptions: {
         output: {
+          strictExecutionOrder: true,
           codeSplitting: {
             groups: [
               {
