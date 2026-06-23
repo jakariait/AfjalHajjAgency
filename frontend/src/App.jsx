@@ -22,6 +22,7 @@ import { setFaviconFromApi } from "./utils/setFavicon.js";
 import Loading from "./component/skeleton/Loading.jsx";
 import ServicePage from "./pagesUser/ServicePage.jsx";
 import WhatsAppButton from "./component/componentGeneral/WhatsAppButton.jsx";
+import PopUpNotices from "./component/componentGeneral/PopUpNotices.jsx";
 import ImageGalleryPage from "./pagesAdmin/ImageGalleryPage.jsx";
 import UserImageGalleryPage from "./pagesUser/UserImageGalleryPage.jsx";
 import UserVideoGalleryPage from "./pagesUser/UserVideoGalleryPage.jsx";
@@ -246,6 +247,8 @@ function App() {
       <ScrollToTop />
       <ScrollToTopButton />
       <WhatsAppButton />
+      <PopUpNotices image={GeneralInfoList?.PopUpImage} active={GeneralInfoList?.PopUpActive} storageKey="popup_notice" />
+
       <Suspense fallback={<Loading />}>
         <Routes>
           {/* General User Routes */}

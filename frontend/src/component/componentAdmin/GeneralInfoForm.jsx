@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import ImageComponent from "../componentGeneral/ImageComponent.jsx";
 import useAuthAdminStore from "../../store/AuthAdminStore.js";
 import useGeneralInfoStore from "../../store/GeneralInfoStore.js";
-import { TextField, Button, Snackbar, Alert, Input } from "@mui/material";
+import { TextField, Button, Snackbar, Alert, Input, Switch } from "@mui/material";
 
 export default function GeneralInfoForm() {
   const { token } = useAuthAdminStore();
-  const { GeneralInfoList, GeneralInfoUpdate } = useGeneralInfoStore();
+  const { GeneralInfoList, GeneralInfoListRequest, GeneralInfoUpdate } = useGeneralInfoStore();
 
   const [formData, setFormData] = useState({
     CompanyName: "",
@@ -21,12 +21,22 @@ export default function GeneralInfoForm() {
     TINNumber: "",
     BINNumber: "",
     FooterCopyright: "",
+    PopUpImage: "",
+    PopUpActive: false,
   });
 
   const [files, setFiles] = useState({
     PrimaryLogo: null,
     SecondaryLogo: null,
     Favicon: null,
+    PopUpImage: null,
+  });
+
+  const [previews, setPreviews] = useState({
+    PrimaryLogo: null,
+    SecondaryLogo: null,
+    Favicon: null,
+    PopUpImage: null,
   });
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -45,17 +55,23 @@ export default function GeneralInfoForm() {
         PrimaryLogo: GeneralInfoList.PrimaryLogo || null,
         SecondaryLogo: GeneralInfoList.SecondaryLogo || null,
         Favicon: GeneralInfoList.Favicon || null,
+        PopUpImage: GeneralInfoList.PopUpImage || null,
       });
     }
   }, [GeneralInfoList]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFiles({ ...files, [e.target.name]: file });
+    const name = e.target.name;
+    setFiles({ ...files, [name]: file });
+    if (file) {
+      setPreviews({ ...previews, [name]: URL.createObjectURL(file) });
+    }
   };
 
   const handleArrayChange = (index, field, value) => {
@@ -96,6 +112,8 @@ export default function GeneralInfoForm() {
     if (result.success) {
       setSnackbarMessage("General information updated successfully!");
       setSnackbarSeverity("success");
+      setPreviews({ PrimaryLogo: null, SecondaryLogo: null, Favicon: null, PopUpImage: null });
+      GeneralInfoListRequest();
     } else {
       if (result.status === 403) {
         setSnackbarMessage(
@@ -111,6 +129,14 @@ export default function GeneralInfoForm() {
     setOpenSnackbar(true);
   };
 
+  useEffect(() => {
+    return () => {
+      Object.values(previews).forEach((url) => {
+        if (url) URL.revokeObjectURL(url);
+      });
+    };
+  }, [previews]);
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
@@ -123,24 +149,42 @@ export default function GeneralInfoForm() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4  mt-8">
-          <ImageComponent
-            imageName={formData.PrimaryLogo}
-            className={"w-40"}
-            altName={formData.CompanyName}
-            skeletonHeight={200}
-          />
+          {previews.PrimaryLogo ? (
+            <img src={previews.PrimaryLogo} alt="Primary Logo Preview" className="w-40 object-cover" />
+          ) : (
+            <ImageComponent
+              imageName={formData.PrimaryLogo}
+              className={"w-40"}
+              altName={formData.CompanyName}
+              skeletonHeight={200}
+            />
+          )}
           {/*<ImageComponent*/}
           {/*  imageName={formData.SecondaryLogo}*/}
           {/*  className={"w-40"}*/}
           {/*  altName={formData.CompanyName}*/}
           {/*  skeletonHeight={200}*/}
           {/*/>*/}
-          <ImageComponent
-            imageName={formData.Favicon}
-            className={"w-40"}
-            altName={formData.CompanyName}
-            skeletonHeight={200}
-          />
+          {previews.Favicon ? (
+            <img src={previews.Favicon} alt="Favicon Preview" className="w-40 object-cover" />
+          ) : (
+            <ImageComponent
+              imageName={formData.Favicon}
+              className={"w-40"}
+              altName={formData.CompanyName}
+              skeletonHeight={200}
+            />
+          )}
+          {previews.PopUpImage ? (
+            <img src={previews.PopUpImage} alt="PopUp Image Preview" className="w-40 object-cover" />
+          ) : (
+            <ImageComponent
+              imageName={formData.PopUpImage}
+              className={"w-40"}
+              altName={formData.CompanyName}
+              skeletonHeight={200}
+            />
+          )}
         </div>
 
         {/* Image Upload Section */}
@@ -180,6 +224,27 @@ export default function GeneralInfoForm() {
               margin="dense"
             />
           </div>
+
+          <div>
+            <label className="block font-medium">PopUp Image</label>
+            <Input
+              type="file"
+              name="PopUpImage"
+              onChange={handleFileChange}
+              accept="image/*"
+              fullWidth
+              margin="dense"
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Switch
+            name="PopUpActive"
+            checked={formData.PopUpActive}
+            onChange={handleChange}
+          />
+          <label className="font-medium">PopUp Active</label>
         </div>
 
         {/* Phone Numbers Section */}

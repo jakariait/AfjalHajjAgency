@@ -5,6 +5,8 @@ const DataSchema = mongoose.Schema(
     PrimaryLogo: { type: String},
     SecondaryLogo: { type: String},
     Favicon: { type: String},
+    PopUpImage: { type: String},
+    PopUpActive: { type: Boolean, default: false },
     CompanyName: { type: String },
     PhoneNumber: { type: [String] },
     CompanyEmail: { type: [String] },

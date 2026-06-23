@@ -16,12 +16,15 @@ const updateGeneralInfo = async (data, files) => {
     const PrimaryLogo = files?.PrimaryLogo?.[0]?.filename || generalInfo?.PrimaryLogo;
     const SecondaryLogo = files?.SecondaryLogo?.[0]?.filename || generalInfo?.SecondaryLogo;
     const Favicon = files?.Favicon?.[0]?.filename || generalInfo?.Favicon;
+    const PopUpImage = files?.PopUpImage?.[0]?.filename || generalInfo?.PopUpImage;
 
     if (!generalInfo) {
       generalInfo = new GeneralInfoModel({
         PrimaryLogo,
         SecondaryLogo,
         Favicon,
+        PopUpImage,
+        PopUpActive: data.PopUpActive === "true" || data.PopUpActive === true,
         ...data,
         PhoneNumber: Array.isArray(data.PhoneNumber) ? data.PhoneNumber : data.PhoneNumber.split(","),
         CompanyEmail: Array.isArray(data.CompanyEmail) ? data.CompanyEmail : data.CompanyEmail.split(","),
@@ -30,6 +33,8 @@ const updateGeneralInfo = async (data, files) => {
       generalInfo.PrimaryLogo = PrimaryLogo;
       generalInfo.SecondaryLogo = SecondaryLogo;
       generalInfo.Favicon = Favicon;
+      generalInfo.PopUpImage = PopUpImage;
+      generalInfo.PopUpActive = data.PopUpActive === "true" || data.PopUpActive === true;
       generalInfo.CompanyName = data.CompanyName;
       generalInfo.PhoneNumber = Array.isArray(data.PhoneNumber) ? data.PhoneNumber : data.PhoneNumber.split(",");
       generalInfo.CompanyEmail = Array.isArray(data.CompanyEmail) ? data.CompanyEmail : data.CompanyEmail.split(",");

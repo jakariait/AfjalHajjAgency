@@ -106,6 +106,10 @@ const upload = multer({ storage, fileFilter }).fields([
     maxCount: 1,
   },
   {
+    name: "PopUpImage",
+    maxCount: 1,
+  },
+  {
     name: "imgSrc",
     maxCount: 1,
   },
