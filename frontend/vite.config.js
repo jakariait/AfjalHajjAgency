@@ -51,13 +51,11 @@ export default defineConfig(async () => {
               {
                 name: "react-vendor",
                 test: /node_modules[\\/](react|react-dom|react-router-dom|scheduler)/,
-                maxSize: 250000,
                 priority: 30,
               },
               {
                 name: "mui-vendor",
                 test: /node_modules[\\/](@mui|@emotion)/,
-                maxSize: 250000,
                 priority: 25,
               },
               {
@@ -73,7 +71,6 @@ export default defineConfig(async () => {
               {
                 name: "primereact",
                 test: /node_modules[\\/]primereact/,
-                maxSize: 250000,
                 priority: 20,
               },
               {
@@ -94,7 +91,6 @@ export default defineConfig(async () => {
               {
                 name: "vendor",
                 test: /node_modules/,
-                maxSize: 300000,
                 priority: 10,
               },
             ],
