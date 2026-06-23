@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Alert, Box, CircularProgress } from "@mui/material";
@@ -43,6 +43,7 @@ const PackageDetail = () => {
   const [error, setError] = useState(null);
   const API_URL = import.meta.env.VITE_API_URL;
   const { GeneralInfoList } = useGeneralInfoStore();
+  const hasPushedRef = useRef(false);
 
   useEffect(() => {
     const fetchPackage = async () => {
@@ -66,6 +67,25 @@ const PackageDetail = () => {
       document.title = `${pkg.title} | ${GeneralInfoList?.CompanyName || "Afjal Hajj Agency"}`;
     }
   }, [pkg, GeneralInfoList]);
+
+  useEffect(() => {
+    if (!pkg || hasPushedRef.current) return;
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "view_content",
+      content_type: "package",
+      content_name: pkg.title,
+      content_id: pkg._id,
+      content_category: pkg.type,
+      currency: "BDT",
+      value: pkg.price,
+      year: pkg.year,
+      featured: pkg.featured,
+    });
+
+    hasPushedRef.current = true;
+  }, [pkg]);
 
   if (loading) {
     return (

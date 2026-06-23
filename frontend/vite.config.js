@@ -27,7 +27,7 @@ export default defineConfig(async () => {
       react(),
       tailwindcss(),
       sitemap({
-        hostname: "https://ecommerce.digiweb.digital",
+        hostname: "https://www.afzalhajjagency.com",
         staticRoutes,
         dynamicRoutes,
         exclude: ["/admin/*", "/user/*"],
@@ -46,7 +46,6 @@ export default defineConfig(async () => {
       chunkSizeWarningLimit: 1000,
       rolldownOptions: {
         output: {
-          strictExecutionOrder: true,
           codeSplitting: {
             groups: [
               {
