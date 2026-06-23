@@ -599,7 +599,7 @@ const Packages = ({ isHomePage = false }) => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.9 }}
                   >
-                    <Link to="/contact-us">
+                    <Link to={`/package/${pkg.slug}`}>
                       <motion.button
                         className="group/btn cursor-pointer relative w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg overflow-hidden"
                         whileHover={{
@@ -619,7 +619,7 @@ const Packages = ({ isHomePage = false }) => {
 
                         <span className="relative z-10 flex items-center justify-center gap-2 text-lg">
                           <span className="w-2 h-2 rotate-45 bg-white/80"></span>
-                          এখনই রেজিস্ট্রেশন করুন
+                          বিস্তারিত দেখুন
                           <span className="w-2 h-2 rotate-45 bg-white/80"></span>
                         </span>
 

@@ -30,6 +30,18 @@ exports.getPackageById = async (req, res) => {
   }
 };
 
+exports.getPackageBySlug = async (req, res) => {
+  try {
+    const packageItem = await packageService.getPackageBySlug(req.params.slug);
+    if (!packageItem) {
+      return res.status(404).json({ message: "Package not found" });
+    }
+    res.status(200).json(packageItem);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 exports.updatePackage = async (req, res) => {
   try {
     const updatedPackage = await packageService.updatePackage(

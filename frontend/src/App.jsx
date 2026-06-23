@@ -29,6 +29,7 @@ import UserVideoGalleryPage from "./pagesUser/UserVideoGalleryPage.jsx";
 import TestimonialsPage from "./pagesAdmin/TestimonialsPage.jsx";
 import AdminPackagePage from "./pagesAdmin/AdminPackagePage.jsx";
 import UserPackagePage from "./pagesUser/UserPackagePage.jsx";
+import UserPackageDetailPage from "./pagesUser/UserPackageDetailPage.jsx";
 
 const GeneralInfoPage = lazy(() => import("./pagesAdmin/GeneralInfoPage.jsx"));
 const HomePage = lazy(() => import("./pagesUser/HomePage.jsx"));
@@ -276,6 +277,7 @@ function App() {
           <Route path="/image-gallery" element={<UserImageGalleryPage />} />
           <Route path="/video-gallery" element={<UserVideoGalleryPage />} />
           <Route path="/packages" element={<UserPackagePage />} />
+          <Route path="/package/:slug" element={<UserPackageDetailPage />} />
 
           {/*Admin Login Page*/}
           <Route path="/admin/login" element={<AdminLogin />} />

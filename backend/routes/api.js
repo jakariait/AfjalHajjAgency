@@ -861,6 +861,7 @@ router.delete(
 // Routes for Packages
 router.post("/packages", adminProtect, PackageController.createPackage);
 router.get("/packages", PackageController.getAllPackages);
+router.get("/packages/slug/:slug", PackageController.getPackageBySlug);
 router.get("/packages/:id", PackageController.getPackageById);
 router.patch("/packages/:id", adminProtect, PackageController.updatePackage);
 router.delete("/packages/:id", adminProtect, PackageController.deletePackage);
