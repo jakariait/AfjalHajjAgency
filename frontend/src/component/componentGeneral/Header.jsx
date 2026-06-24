@@ -1,7 +1,5 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Registration from "../componentGeneral/Registration.jsx";
 import GeneralInfoStore from "../../store/GeneralInfoStore.js";
 import ImageComponent from "./ImageComponent.jsx";
 import CartLogin from "./CartLogin.jsx";
@@ -120,7 +118,7 @@ export default function Header() {
   }, []);
 
   return (
-    <nav className="relative  border-amber-400/30 px-4 sticky top-0 z-50 bg-white shadow-md">
+    <nav className="relative  border-amber-400/30 px-4  sticky top-0 z-50 bg-white shadow-md">
       {/* Subtle Islamic Pattern Background */}
       <div className="absolute inset-0 opacity-[0.02]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -153,18 +151,18 @@ export default function Header() {
         </svg>
       </div>
 
-      <div className="relative xl:container xl:mx-auto flex justify-between py-1 md:py-2 items-center">
+      <div className="relative xl:container xl:mx-auto flex justify-between items-center">
         {/* Logo with Islamic Frame */}
         <Link to="/" className="flex items-center group">
           <div className="relative">
             {/* Decorative background glow */}
             <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500/10 to-amber-500/10 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-            <div className="relative flex-col items-center justify-center gap-4 bg-gradient-to-br from-emerald-50 to-amber-50 p-3 rounded-xl border-2 border-emerald-200/50 group-hover:border-amber-400/50 transition-all duration-300">
+            <div className="relative flex-col items-center justify-center bg-gradient-to-br from-emerald-50 to-amber-50  rounded-xl border-2 border-emerald-200/50 group-hover:border-amber-400/50 transition-all duration-300">
               <ImageComponent
                 imageName={GeneralInfoList?.PrimaryLogo}
                 altName={GeneralInfoList?.CompanyName}
-                className="w-30 md:w-40 cursor-pointer transition-transform duration-300 group-hover:scale-105"
+                className="w-55 -my-5 cursor-pointer transition-transform duration-300 group-hover:scale-105"
               />
 
               {/* Decorative Corners */}

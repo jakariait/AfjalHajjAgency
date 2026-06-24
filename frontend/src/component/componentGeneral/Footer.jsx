@@ -110,11 +110,11 @@ const Footer = () => {
             <div className="relative">
               <div className="absolute -inset-2 bg-gradient-to-br from-amber-500/20 to-yellow-500/20 rounded-2xl blur-sm"></div>
               <Link href="/" className="relative block">
-                <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border-2 border-amber-400/30 hover:border-amber-400/60 transition-all duration-300 hover:shadow-amber-500/20 hover:shadow-xl">
+                <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border-2 border-amber-400/30 hover:border-amber-400/60 transition-all duration-300 hover:shadow-amber-500/20 hover:shadow-xl">
                   <ImageComponent
                     imageName={GeneralInfoList?.PrimaryLogo}
                     altName={GeneralInfoList?.CompanyName}
-                    className="w-full cursor-pointer transition-transform duration-300 hover:scale-105"
+                    className="w-full  cursor-pointer transition-transform duration-300 hover:scale-105"
                   />
 
                   {/* Decorative Corners */}

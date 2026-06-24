@@ -15,7 +15,10 @@ const PopUpNotices = ({
   useEffect(() => {
     const shown = sessionStorage.getItem(storageKey);
     if (!shown) {
-      setVisible(true);
+      const timer = setTimeout(() => {
+        setVisible(true);
+      }, 5000);
+      return () => clearTimeout(timer);
     }
   }, [storageKey]);
 
