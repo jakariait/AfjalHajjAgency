@@ -91,7 +91,7 @@ export default function HajjHero() {
           className={`font-noto-serif-bengali text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 transition-all duration-1000 delay-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           style={{ textShadow: "0 4px 20px rgba(0, 0, 0, 0.7)" }}
         >
-          আপনোর হজ্জ
+          আপনার হজ্জ
           <br />
           আমাদের দায়িত্ব
         </h1>

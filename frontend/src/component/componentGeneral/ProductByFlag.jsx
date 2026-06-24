@@ -15,6 +15,10 @@ const ProductByFlag = () => {
     fetchFlags();
   }, [fetchFlags]);
 
+  const hasAnyProducts = flags.some(
+    (flag) => (homeProducts[flag.name] || []).length > 0,
+  );
+
   if (productsLoading || flagsLoading)
     return (
       <div className="xl:container xl:mx-auto p-4 justify-center md:justify-start">
@@ -36,6 +40,19 @@ const ProductByFlag = () => {
           <Skeleton height={250} width="100%" />
           <Skeleton height={250} width="100%" />
         </div>
+      </div>
+    );
+
+  if (!hasAnyProducts)
+    return (
+      <div className="flex flex-col items-center justify-center py-20 px-4">
+        <div className="text-6xl mb-6">📦</div>
+        <h3 className="text-2xl font-bold text-emerald-800 mb-3">
+          এখনও কোনো পণ্য যোগ করা হয়নি
+        </h3>
+        <p className="text-gray-500 text-lg text-center max-w-md">
+          খুব শীঘ্রই হজ ও ওমরাহর জন্য প্রয়োজনীয় পণ্য এখানে পাওয়া যাবে।
+        </p>
       </div>
     );
 

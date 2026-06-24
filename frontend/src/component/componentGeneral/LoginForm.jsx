@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaEyeSlash, FaEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -13,6 +13,7 @@ const LoginForm = () => {
 
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Snackbar state
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -44,7 +45,7 @@ const LoginForm = () => {
       <div className="bg-[#EEF5F6] rounded-2xl shadow-md p-8 w-full max-w-md text-center relative">
         {/* Lock Icon */}
         <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-          <div className="accentBgColor p-4 rounded-full">
+          <div className="bg-gradient-to-r from-indigo-200 to-blue-200 p-4 rounded-full">
             <FaLock className="primaryTextColor text-5xl" />
           </div>
         </div>
@@ -63,7 +64,7 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className="space-y-4 text-left">
           {/* Email / Phone */}
           <div className="flex items-center bg-white rounded-md shadow-sm px-4 py-4">
-            <FaUser className="primaryTextColor mr-5 text-2xl " />
+            <FaUser className="primaryTextColor mr-5 text-2xl" />
             <input
               type="text"
               placeholder="Email or Phone Number"
@@ -75,16 +76,22 @@ const LoginForm = () => {
           </div>
 
           {/* Password */}
-          <div className="flex items-center bg-white rounded-md shadow-sm px-4 py-4">
-            <FaLock className="primaryTextColor mr-5 text-2xl " />
+          <div className="flex items-center bg-white rounded-md shadow-sm px-4 py-4 relative">
+            <FaLock className="primaryTextColor mr-5 text-2xl" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
-              className="w-full outline-none text-sm bg-transparent"
+              className={`w-full outline-none bg-transparent pr-10 text-lg ${showPassword ? "font-bold" : ""} placeholder:text-sm`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <div
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </div>
           </div>
 
           {/* Remember Me & Forgot */}
@@ -100,7 +107,7 @@ const LoginForm = () => {
           {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full py-3 rounded-md mt-2 primaryBgColor accentTextColor"
+            className="w-full py-3 rounded-md mt-2 primaryBgColor accentTextColor hover:opacity-90 transition"
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign in"}
@@ -109,7 +116,7 @@ const LoginForm = () => {
 
         {/* Register */}
         <p className="text-sm mt-6 text-gray-600">
-          Don’t have any account?{" "}
+          Don&apos;t have any account?{" "}
           <Link to="/register">
             <button className="primaryTextColor font-medium hover:underline cursor-pointer">
               Register account
