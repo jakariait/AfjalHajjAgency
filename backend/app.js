@@ -56,7 +56,7 @@ app.set("trust proxy", 1);
 
 
 // Apply Sharp middleware BEFORE static serving
-app.use("/uploads", imageMiddleware);
+// app.use("/uploads", imageMiddleware);
 
 
 // Static file serving
