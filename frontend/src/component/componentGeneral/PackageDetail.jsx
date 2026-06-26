@@ -185,7 +185,7 @@ const PackageDetail = () => {
               to="/packages"
               className="hover:text-emerald-600 transition-colors"
             >
-              প্যাকেজ সমূহ
+              প্যাকেজসমূহ
             </Link>
             <span>/</span>
             <span className="text-emerald-700 font-semibold">{pkg.title}</span>
@@ -410,8 +410,8 @@ const PackageDetail = () => {
                 পছন্দের প্যাকেজটি আজই বুকিং দিন
               </h2>
               <p className="text-emerald-100 mb-6">
-                হজ্জ – ২০২৬ ও ২০২৭ সালের প্রাক-নিবন্ধন চলছে এবং প্রতি মাসের ওমরাহ
-                সময়সূচী জানতে যোগাযোগ করুন
+                হজ্জ – ২০২৬ ও ২০২৭ সালের প্রাক-নিবন্ধন চলছে এবং প্রতি মাসের
+                ওমরাহ সময়সূচী জানতে যোগাযোগ করুন
               </p>
               <Link to="/contact-us">
                 <motion.button
@@ -490,7 +490,7 @@ const PackageDetail = () => {
                     সকল প্যাকেজ
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    আমাদের অন্যান্য হজ্জ ও ওমরাহ প্যাকেজ সমূহ দেখুন
+                    আমাদের অন্যান্য হজ্জ ও ওমরাহ প্যাকেজসমূহ দেখুন
                   </p>
                 </motion.div>
               </Link>

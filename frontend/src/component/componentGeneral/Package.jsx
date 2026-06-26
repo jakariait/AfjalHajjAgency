@@ -306,7 +306,7 @@ const Packages = ({ isHomePage = false }) => {
             className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6 relative inline-block"
             variants={fadeUpVariants}
           >
-            আমাদের হজ্জ ও ওমরাহ প্যাকেজ সমূহ
+            আমাদের হজ্জ ও ওমরাহ প্যাকেজসমূহ
             <motion.div
               className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-40 h-1 bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500 rounded-full"
               initial={{ scaleX: 0 }}

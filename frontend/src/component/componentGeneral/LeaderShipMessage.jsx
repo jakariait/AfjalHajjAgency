@@ -5,7 +5,7 @@ import ithan from "../../../public/Iqramul-Hasan-Ether.webp";
 const LeaderShipMessage = () => {
   const leaders = [
     {
-      name: "আলহাজ্ব গোলাম মোস্তফা",
+      name: "আলহাজ্ব আফজাল হোসেন",
       position: "চেয়ারম্যান",
       image: mustofa,
       message: `"بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ"
@@ -45,15 +45,15 @@ const LeaderShipMessage = () => {
               <div className="relative bg-white/90 backdrop-blur-sm p-10 rounded-3xl shadow-2xl border-2 border-emerald-200/50">
                 {/* Leader Info */}
                 <div className="text-center mb-8">
-                  <div className="mb-4 flex justify-center">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      width={200}
-                      height={220}
-                      className=" object-cover border-1 border-emerald-400 shadow-lg"
-                    />
-                  </div>
+                  {/*<div className="mb-4 flex justify-center">*/}
+                  {/*  <img*/}
+                  {/*    src={leader.image}*/}
+                  {/*    alt={leader.name}*/}
+                  {/*    width={200}*/}
+                  {/*    height={220}*/}
+                  {/*    className=" object-cover border-1 border-emerald-400 shadow-lg"*/}
+                  {/*  />*/}
+                  {/*</div>*/}
                   <h3 className="text-2xl font-bold text-emerald-900 mb-2">
                     {leader.name}
                   </h3>

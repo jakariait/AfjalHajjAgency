@@ -171,7 +171,7 @@ const AboutUs = () => {
               <button className="group cursor-pointer relative bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
                 <span className="relative z-10 flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rotate-45 bg-white/80"></span>
-                  আমাদের প্যাকেজ সমূহ
+                  আমাদের প্যাকেজসমূহ
                 </span>
                 <div className="absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-white/40 rounded-tl"></div>
                 <div className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-white/40 rounded-br"></div>
@@ -236,7 +236,7 @@ const AboutUs = () => {
               <p className="text-white/90 text-lg leading-relaxed">
                 হজ্জ ও ওমরাহ একটি মহান ইবাদত ও পবিত্র দায়িত্ব। আল্লাহর মেহমানদের
                 এই পুণ্যময় পথচলায় সর্বোচ্চ সততা ও আন্তরিকতার সাথে তাদের আজীবনের
-                বিশ্বস্ত সহযাত্রী হওয়াই আমাদের
+                বিশ্বস্ত সহযাত্রী হওয়াই আমাদের মূল আদর্শ।
               </p>
               {/* Decorative corners */}
               <div className="absolute top-2 left-2 w-5 h-5 border-t-2 border-l-2 border-amber-400/50 rounded-tl"></div>
