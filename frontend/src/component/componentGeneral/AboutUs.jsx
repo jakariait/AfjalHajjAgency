@@ -114,7 +114,7 @@ const AboutUs = () => {
               {/* Quran Quote */}
               <div className="text-center mb-8 pb-8 border-b-2 border-emerald-200/50">
                 <p className="text-2xl text-emerald-800 font-semibold italic leading-relaxed">
-                  "নিশ্চয়ই হজ ও ওমরাহ একমাত্র আল্লাহর জন্য।"
+                  "নিশ্চয়ই হজ্জ ও ওমরাহ একমাত্র আল্লাহর জন্য।"
                 </p>
                 <p className="text-amber-600 font-semibold mt-3">
                   – আল কুরআন (সূরা আল-বাকারা: ১৯৬)

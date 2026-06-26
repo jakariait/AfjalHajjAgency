@@ -67,7 +67,7 @@ const HomePageProducts = () => {
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4 relative inline-block">
-            হজ ও ওমরাহর জন্য{" "}
+            হজ্জ ও ওমরাহর জন্য{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600">
               প্রয়োজনীয় পণ্য
             </span>
@@ -84,7 +84,7 @@ const HomePageProducts = () => {
               <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-amber-500/40 rounded-br"></div>
 
               <p className="text-gray-700 leading-relaxed text-lg">
-                হজ ও ওমরাহ যাত্রায় আপনার সাথী হতে আমরা নিয়ে এসেছি উচ্চ
+                হজ্জ ও ওমরাহ যাত্রায় আপনার সাথী হতে আমরা নিয়ে এসেছি উচ্চ
                 মানসম্পন্ন এবং প্রয়োজনীয় সকল পণ্য। ইহরাম, তাসবীহ, দোয়া বই,
                 ভ্রমণ ব্যাগ থেকে শুরু করে পবিত্র যাত্রার প্রতিটি মুহূর্তে
                 প্রয়োজনীয় সামগ্রী পাবেন এখানে। মানসম্মত পণ্য এবং সাশ্রয়ী

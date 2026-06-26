@@ -61,7 +61,7 @@ const UserFAQ = () => {
         </h2>
 
         <p className="text-gray-600 text-lg max-w-2xl mx-auto mt-8">
-          আপনার হজ ও ওমরাহ সম্পর্কিত সাধারণ প্রশ্নের উত্তর এখানে পাবেন
+          আপনার হজ্জ ও ওমরাহ সম্পর্কিত সাধারণ প্রশ্নের উত্তর এখানে পাবেন
         </p>
 
         {/* Decorative Divider */}

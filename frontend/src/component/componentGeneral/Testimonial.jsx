@@ -64,7 +64,7 @@ const Testimonials = () => {
         <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4 inline-block">
           আস্থার ২০ বছর,{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600">
-            স্বীকৃত হজ সেবা
+            স্বীকৃত হজ্জ সেবা
           </span>
         </h2>
         <p className="text-xl md:text-2xl text-amber-700 font-semibold mt-4">

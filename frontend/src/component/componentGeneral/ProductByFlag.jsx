@@ -4,7 +4,6 @@ import useProductStore from "../../store/useProductStore.js";
 import useFlagStore from "../../store/useFlagStore.js";
 import ProductList from "./ProductList.jsx";
 import Skeleton from "react-loading-skeleton";
-import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const ProductByFlag = () => {
@@ -51,7 +50,7 @@ const ProductByFlag = () => {
           এখনও কোনো পণ্য যোগ করা হয়নি
         </h3>
         <p className="text-gray-500 text-lg text-center max-w-md">
-          খুব শীঘ্রই হজ ও ওমরাহর জন্য প্রয়োজনীয় পণ্য এখানে পাওয়া যাবে।
+          খুব শীঘ্রই হজ্জ ও ওমরাহর জন্য প্রয়োজনীয় পণ্য এখানে পাওয়া যাবে।
         </p>
       </div>
     );

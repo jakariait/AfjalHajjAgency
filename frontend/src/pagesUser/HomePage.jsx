@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../component/componentGeneral/Layout.jsx";
-import ProductByFlag from "../component/componentGeneral/ProductByFlag.jsx";
 import HajjHero from "../component/componentGeneral/HajjHero.jsx";
 import Services from "../component/componentGeneral/Service.jsx";
 import Gallery from "../component/componentGeneral/Gallery.jsx";

@@ -306,7 +306,7 @@ const Packages = ({ isHomePage = false }) => {
             className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6 relative inline-block"
             variants={fadeUpVariants}
           >
-            আমাদের হজ ও ওমরাহ প্যাকেজ সমূহ
+            আমাদের হজ্জ ও ওমরাহ প্যাকেজ সমূহ
             <motion.div
               className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-40 h-1 bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500 rounded-full"
               initial={{ scaleX: 0 }}
@@ -323,7 +323,7 @@ const Packages = ({ isHomePage = false }) => {
           >
             <div className="relative bg-gradient-to-r from-emerald-600 to-emerald-700 p-6 rounded-xl shadow-lg border-2 border-emerald-500/50">
               <p className="text-white text-lg leading-relaxed">
-                হজ – ২০২৬ ও ২০২৭ সালের প্রাক-নিবন্ধন চলছে এবং প্রতি মাসের ওমরাহ
+                হজ্জ – ২০২৬ ও ২০২৭ সালের প্রাক-নিবন্ধন চলছে এবং প্রতি মাসের ওমরাহ
                 সময়সূচী জানতে যোগাযোগ করুন:
                 <a
                   href={`tel:${GeneralInfoList?.PhoneNumber[0]}`}
@@ -507,7 +507,7 @@ const Packages = ({ isHomePage = false }) => {
                           : "bg-emerald-100 text-emerald-700"
                       }`}
                     >
-                      {pkg.type === "hajj" ? "🕋 হজ" : "🌙 ওমরাহ"}
+                      {pkg.type === "hajj" ? "🕋 হজ্জ" : "🌙 ওমরাহ"}
                     </span>
                   </motion.div>
 
