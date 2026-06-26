@@ -283,7 +283,7 @@ const Footer = () => {
               </svg>
               <span>by</span>
               <a
-                href="https://www.digiweb.digital/"
+                href="https://www.digiwebdigital.com/"
                 className="text-amber-300 hover:text-amber-200 font-medium transition-colors duration-300 hover:underline decoration-amber-400/50"
               >
                 DigiWeb
