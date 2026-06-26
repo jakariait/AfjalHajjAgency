@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /user/
+Disallow: /checkout
+Disallow: /thank-you/
+Sitemap: https://www.afzalhajjagency.com/sitemap.xml
