@@ -323,8 +323,8 @@ const Packages = ({ isHomePage = false }) => {
           >
             <div className="relative bg-gradient-to-r from-emerald-600 to-emerald-700 p-6 rounded-xl shadow-lg border-2 border-emerald-500/50">
               <p className="text-white text-lg leading-relaxed">
-                হজ্জ – ২০২৬ ও ২০২৭ সালের প্রাক-নিবন্ধন চলছে এবং প্রতি মাসের ওমরাহ
-                সময়সূচী জানতে যোগাযোগ করুন:
+                হজ্জ – ২০২৬ ও ২০২৭ সালের প্রাক-নিবন্ধন চলছে এবং প্রতি মাসের
+                ওমরাহ সময়সূচী জানতে যোগাযোগ করুন:
                 <a
                   href={`tel:${GeneralInfoList?.PhoneNumber[0]}`}
                   className="font-bold ml-2 hover:text-amber-300 transition-colors duration-300"
@@ -482,16 +482,16 @@ const Packages = ({ isHomePage = false }) => {
                         pkg.tier === "premium"
                           ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
                           : pkg.tier === "standard"
-                          ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
-                          : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                            ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
+                            : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
                       }`}
                     >
                       <span className="w-2 h-2 rotate-45 bg-white/80"></span>
                       {pkg.tier === "premium"
                         ? "প্রিমিয়াম"
                         : pkg.tier === "standard"
-                        ? "স্ট্যান্ডার্ড"
-                        : "ইকোনমি"}
+                          ? "স্ট্যান্ডার্ড"
+                          : "ইকোনমি"}
                       <span className="w-2 h-2 rotate-45 bg-white/80"></span>
                     </span>
                   </motion.div>
@@ -554,6 +554,34 @@ const Packages = ({ isHomePage = false }) => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 + 0.5 }}
                   ></motion.div>
+
+                  {/* Features List */}
+                  <motion.ul
+                    className="space-y-3 mb-6"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
+                  >
+                    {pkg.feature.map((feature, idx) => (
+                      <motion.li
+                        key={idx}
+                        className="flex items-start gap-3 text-gray-700"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 0.4,
+                          delay: index * 0.1 + 0.7 + idx * 0.05,
+                        }}
+                      >
+                        <span className="mt-1.5 w-1.5 h-1.5 rotate-45 bg-emerald-500 flex-shrink-0"></span>
+                        <span className="text-sm leading-relaxed">
+                          {feature}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </motion.ul>
 
                   {/* Note */}
                   <motion.div
