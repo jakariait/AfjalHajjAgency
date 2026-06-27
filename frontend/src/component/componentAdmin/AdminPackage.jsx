@@ -27,6 +27,10 @@ import {
   AccordionSummary,
   AccordionDetails,
   Tooltip,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  Radio,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
@@ -44,8 +48,7 @@ const emptyPackage = {
   priceWithoutQurbani: "",
   duration: "",
   flightInfo: "",
-  feature: "",
-  featured: false,
+  tier: "standard",
   showOnHomePage: false,
   specialFeatures: "",
   journeyDetails: "",
@@ -144,22 +147,18 @@ const PackageForm = ({ data, setData }) => (
         <Typography fontWeight={600}>Card Display</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <TextField
-          fullWidth label="Short Features (comma-separated)" variant="outlined" required
-          value={data.feature}
-          onChange={(e) => setData({ ...data, feature: e.target.value })}
-          sx={{ mb: 2 }}
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={data.featured}
-              onChange={(e) => setData({ ...data, featured: e.target.checked })}
-            />
-          }
-          label="Featured"
-          sx={{ mb: 1, display: "block" }}
-        />
+        <FormControl required sx={{ mb: 2 }}>
+          <FormLabel>Package Tier</FormLabel>
+          <RadioGroup
+            row
+            value={data.tier}
+            onChange={(e) => setData({ ...data, tier: e.target.value })}
+          >
+            <FormControlLabel value="standard" control={<Radio />} label="Standard" />
+            <FormControlLabel value="premium" control={<Radio />} label="Premium" />
+            <FormControlLabel value="economy" control={<Radio />} label="Economy" />
+          </RadioGroup>
+        </FormControl>
         <FormControlLabel
           control={
             <Checkbox
@@ -315,7 +314,7 @@ const AdminPackage = () => {
 
   const buildPayload = (data) => {
     const payload = { ...data };
-    ["feature", "specialFeatures", "roomFacilities"].forEach((field) => {
+    ["specialFeatures", "roomFacilities"].forEach((field) => {
       payload[field] = typeof data[field] === "string"
         ? data[field].split(",").map((f) => f.trim()).filter(Boolean)
         : data[field];
@@ -333,7 +332,6 @@ const AdminPackage = () => {
   const openEditDialog = (pkg) => {
     setFormData({
       ...pkg,
-      feature: toCommaStr(pkg.feature),
       specialFeatures: toCommaStr(pkg.specialFeatures),
       roomFacilities: toCommaStr(pkg.roomFacilities),
     });
@@ -447,8 +445,7 @@ const AdminPackage = () => {
                 <TableCell>Title</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Type</TableCell>
-                <TableCell>Features</TableCell>
-                <TableCell align="center">Featured</TableCell>
+                <TableCell>Tier</TableCell>
                 <TableCell align="center">Show on Home Page</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
@@ -459,12 +456,7 @@ const AdminPackage = () => {
                   <TableCell>{pkg.title}</TableCell>
                   <TableCell>{pkg.price}</TableCell>
                   <TableCell>{pkg.type}</TableCell>
-                  <TableCell>{pkg.feature?.join(", ")}</TableCell>
-                  <TableCell align="center">
-                    {pkg.featured ? (
-                      <Typography color="success.main" fontWeight={600}>Yes</Typography>
-                    ) : "No"}
-                  </TableCell>
+                  <TableCell style={{ textTransform: "capitalize" }}>{pkg.tier}</TableCell>
                   <TableCell align="center">
                     {pkg.showOnHomePage ? (
                       <Typography color="success.main" fontWeight={600}>Yes</Typography>

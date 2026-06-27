@@ -411,32 +411,9 @@ const Packages = ({ isHomePage = false }) => {
                   scale: 1.02,
                   transition: { duration: 0.3, ease: "easeOut" },
                 }}
-                className={`group relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-500 overflow-hidden flex flex-col h-full ${
-                  pkg.featured
-                    ? "border-4 border-amber-400 ring-4 ring-amber-400/20 "
-                    : "border-2 border-emerald-200/50 hover:border-amber-400/50"
-                }`}
+                className="group relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-500 overflow-hidden flex flex-col h-full border-2 border-emerald-200/50 hover:border-amber-400/50"
                 style={{ perspective: "1000px" }}
               >
-                {/* Featured Badge */}
-                {pkg.featured && (
-                  <motion.div
-                    className="absolute top-4 right-4 z-10"
-                    variants={badgeVariants}
-                  >
-                    <motion.div
-                      className="relative bg-gradient-to-r from-amber-500 to-amber-600 text-white px-4 py-2 rounded-lg shadow-lg font-bold text-sm"
-                      whileHover={{ scale: 1.05, rotate: -2 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      জনপ্রিয়
-                      {/* Decorative corners */}
-                      <div className="absolute top-0.5 left-0.5 w-2 h-2 border-t border-l border-white/50"></div>
-                      <div className="absolute bottom-0.5 right-0.5 w-2 h-2 border-b border-r border-white/50"></div>
-                    </motion.div>
-                  </motion.div>
-                )}
-
                 {/* Decorative Background Pattern */}
                 <div className="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.03] transition-opacity duration-300">
                   <svg
@@ -492,6 +469,33 @@ const Packages = ({ isHomePage = false }) => {
 
                 {/* Content */}
                 <div className="relative p-6">
+                  {/* Tier Badge */}
+                  <motion.div
+                    className="absolute top-4 right-4 z-10"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.6 }}
+                  >
+                    <span
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold shadow-md ${
+                        pkg.tier === "premium"
+                          ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
+                          : pkg.tier === "standard"
+                          ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
+                          : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                      }`}
+                    >
+                      <span className="w-2 h-2 rotate-45 bg-white/80"></span>
+                      {pkg.tier === "premium"
+                        ? "প্রিমিয়াম"
+                        : pkg.tier === "standard"
+                        ? "স্ট্যান্ডার্ড"
+                        : "ইকোনমি"}
+                      <span className="w-2 h-2 rotate-45 bg-white/80"></span>
+                    </span>
+                  </motion.div>
+
                   {/* Package Type Badge */}
                   <motion.div
                     className="mb-4"
@@ -551,34 +555,6 @@ const Packages = ({ isHomePage = false }) => {
                     transition={{ duration: 0.6, delay: index * 0.1 + 0.5 }}
                   ></motion.div>
 
-                  {/* Features List */}
-                  <motion.ul
-                    className="space-y-3 mb-6"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
-                  >
-                    {pkg.feature.map((feature, idx) => (
-                      <motion.li
-                        key={idx}
-                        className="flex items-start gap-3 text-gray-700"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.4,
-                          delay: index * 0.1 + 0.7 + idx * 0.05,
-                        }}
-                      >
-                        <span className="mt-1.5 w-1.5 h-1.5 rotate-45 bg-emerald-500 flex-shrink-0"></span>
-                        <span className="text-sm leading-relaxed">
-                          {feature}
-                        </span>
-                      </motion.li>
-                    ))}
-                  </motion.ul>
-
                   {/* Note */}
                   <motion.div
                     className="mb-6 p-3 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg"
@@ -633,44 +609,28 @@ const Packages = ({ isHomePage = false }) => {
 
                 {/* Card Decorative Corners */}
                 <motion.div
-                  className={`absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 rounded-tl transition-colors duration-300 ${
-                    pkg.featured
-                      ? "border-amber-400"
-                      : "border-emerald-300/30 group-hover:border-amber-400/50"
-                  }`}
+                  className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-emerald-300/30 rounded-tl group-hover:border-amber-400/50 transition-colors duration-300"
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 1.0 }}
                 ></motion.div>
                 <motion.div
-                  className={`absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 rounded-tr transition-colors duration-300 ${
-                    pkg.featured
-                      ? "border-amber-400"
-                      : "border-emerald-300/30 group-hover:border-amber-400/50"
-                  }`}
+                  className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-emerald-300/30 rounded-tr group-hover:border-amber-400/50 transition-colors duration-300"
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 1.1 }}
                 ></motion.div>
                 <motion.div
-                  className={`absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 rounded-bl transition-colors duration-300 ${
-                    pkg.featured
-                      ? "border-amber-400"
-                      : "border-emerald-300/30 group-hover:border-amber-400/50"
-                  }`}
+                  className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-emerald-300/30 rounded-bl group-hover:border-amber-400/50 transition-colors duration-300"
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 1.2 }}
                 ></motion.div>
                 <motion.div
-                  className={`absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 rounded-br transition-colors duration-300 ${
-                    pkg.featured
-                      ? "border-amber-400"
-                      : "border-emerald-300/30 group-hover:border-amber-400/50"
-                  }`}
+                  className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-emerald-300/30 rounded-br group-hover:border-amber-400/50 transition-colors duration-300"
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}

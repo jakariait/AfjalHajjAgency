@@ -26,8 +26,8 @@ const DataSchema = mongoose.Schema(
     duration: { type: String },
     flightInfo: { type: String },
 
-    // Features (for card display)
-    feature: { type: [String], required: true },
+    // Package tier
+    tier: { type: String, enum: ["standard", "premium", "economy"], required: true, default: "standard" },
 
     // Detailed info
     specialFeatures: { type: [String] },
@@ -51,7 +51,6 @@ const DataSchema = mongoose.Schema(
     supervision: { type: String },
 
     // Flags
-    featured: { type: Boolean, default: false, required: true },
     showOnHomePage: { type: Boolean, default: false, required: true },
 
     // Disclaimer

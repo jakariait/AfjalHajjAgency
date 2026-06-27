@@ -81,7 +81,6 @@ const PackageDetail = () => {
       currency: "BDT",
       value: pkg.price,
       year: pkg.year,
-      featured: pkg.featured,
     });
 
     hasPushedRef.current = true;
@@ -210,7 +209,26 @@ const PackageDetail = () => {
               <div
                 className={`h-3 ${pkg.type === "hajj" ? "bg-gradient-to-r from-emerald-600 via-amber-500 to-emerald-600" : "bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500"}`}
               />
-              <div className="p-8">
+              <div className="relative p-8">
+                {/* Tier Badge */}
+                <span
+                  className={`absolute top-4 right-4 z-10 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold shadow-md ${
+                    pkg.tier === "premium"
+                      ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
+                      : pkg.tier === "standard"
+                      ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
+                      : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                  }`}
+                >
+                  <span className="w-2 h-2 rotate-45 bg-white/80"></span>
+                  {pkg.tier === "premium"
+                    ? "প্রিমিয়াম"
+                    : pkg.tier === "standard"
+                    ? "স্ট্যান্ডার্ড"
+                    : "ইকোনমি"}
+                  <span className="w-2 h-2 rotate-45 bg-white/80"></span>
+                </span>
+
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                   <div className="flex items-center gap-3">
                     <span
@@ -224,11 +242,6 @@ const PackageDetail = () => {
                       </span>
                     )}
                   </div>
-                  {pkg.featured && (
-                    <span className="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-5 py-2 rounded-lg font-bold text-sm shadow-lg">
-                      জনপ্রিয়
-                    </span>
-                  )}
                 </div>
 
                 <h1 className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4">
@@ -460,25 +473,7 @@ const PackageDetail = () => {
                 </a>
               </div>
 
-              {/* Quick package features */}
-              {pkg.feature?.length > 0 && (
-                <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-emerald-200/50">
-                  <h3 className="text-emerald-900 font-bold mb-4">
-                    প্যাকেজ সারসংক্ষেপ
-                  </h3>
-                  <ul className="space-y-2">
-                    {pkg.feature.map((f, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-sm text-gray-600"
-                      >
-                        <span className="mt-1 w-1.5 h-1.5 rotate-45 bg-emerald-500 flex-shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+
 
               {/* View All Packages */}
               <Link to="/packages">
